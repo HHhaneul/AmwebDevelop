@@ -1,0 +1,6 @@
+const obj = {a:1, b:2, c:3};
+undefined
+const keys = Object.keys(obj);
+undefined
+keys
+(3) ['a', 'b', 'c']

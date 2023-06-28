@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* 공통 스타일 */
+* { font-family: 'Noto Sans KR', sans-serif; box-sizing: border-box; color: #212121; outline: none; }
+html { font-size: 13px; } /* 1rem - 13px */
+body { margin: 0 auto; font-family: -apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif;  }
+
+ul, ol { list-style: none; padding: 0; margin: 0; }
+dl, dt, dd { padding: 0; margin: 0; }
+a { text-decoration: none; }
+img { border: 0; }
+
+body {min-width: 320px; width: 100%; height: 100%; margin: 0px auto;}
+footer ul {display: flex; justify-content: space-around; margin: 5px;}
+
+/* 헤더 공통 */
+body header {margin: 0 auto; width: 1000px;}
+.head1 {display: flex; padding: 15px 5px; align-items: center; position: relative; margin: 0 auto; justify-content: space-around;}
+.head1 ul {display: flex; list-style: none;}
+
+/* 헤더1 */
+.head1_search {margin: 11px auto;}
+.head1_search input {border-radius: 50px; border-color: #007aff; height: 40px; width: 500px;}
+.head1_search input#stext{padding-left: 15px; align-items: center;}
+.head1_search button {position: absolute; margin-left: -50px; border: none; margin-top: 8px;}
+.header_login {width: 300px; align-items: center; font-size: 14px; font-weight: bold; display: flex; margin: 0 auto; justify-content: space-evenly;}
+.header_login div {margin: 0px auto;}
+.head2_bg { margin: 15px; align-items: center; display: block; margin: 0px auto;}
+.head_bg {width: 600px; border-radius: 15px; display: block; margin: 0px auto;}
+
+/*메인 공통*/
+main{width: 1000px;  margin: 0px auto; align-items: center; }
+
+
+/*메인 카테고리*/
+.category {padding: 15px; margin: 15px 0px;  font-size: 23px; display:flex; justify-content: space-around; border-bottom: 1px solid #ededed; background-color: #ddf9fafb; border-radius: 30px;}
+
+
+/* 채용공고 검색 */
+.search_category 
+.category_check div {overflow: auto;width: 160px; height: 150px; border: 1px solid #000;}
+.category_check li div {width: 200px; height: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.category_check{margin: 0 0 0 20px; width: 960px; display: flex;
+}
+.category_1 div {font-size: 16px; font-weight: bold; width: 160px; display:flex; justify-content: space-around;}
+.category_1 { display:flex; justify-content: space-around; padding: 10px 0px; width: 960px; margin-left: 20px;}
+.category_1 a {background-color: #ddf9fafb; border-radius: 15px;}
+
+/* 검색결과 */
+.vvip {margin: 0px auto; display:flex; justify-content: space-around; flex-wrap: wrap; width: 1200px;}
+.vvip li {margin: 15px 15px; background-color: #fff; border-radius: 15px; border-top: 8px solid silver; border-bottom: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; position:static; white-space: normal; width: 300px; max-width: 300px; padding: 13px;} 
+.vvip li div {display:flex; justify-content: space-around;}
+.vvip_main {font-size: 11px; font-weight: bold;}
+.search_result {display: flex; justify-content: space-around;}
+
+/*왼쪽 바*/
+.left_bar {position: absolute; left: 80px; top: 130px; width: 150px; background-color: #ededed; border-radius: 15px;}
+.left_bar div {align-items: center; text-align: center; font-size: 15px; background-color: #ededed; border-radius: 15px; font-weight: bold;}
+.left_bar img {width: 130px; border-radius: 15px;}
+.left_bar li {font-size: 13px; font-weight:100;}
+
+/*푸터 공용*/
+footer {width: 1000px; margin: 10px auto;}
+
+/*푸터 배너창*/
+.foot_table {padding: 20px 0; height: 150px; display: flex; justify-content: space-around; }
+.foot_table a {text-align: center; margin: 0 39px;}
+.foot_table_mid {width: 135px; padding-top: 28px;}
+
+/*푸터 메뉴*/
+.company_info {font-size: 5px; text-align: center;}
+
+/*푸터 출처*/
+.foot_source {background: #cccccc00 url('source.png') no-repeat center center ; width: 100%; height: 15px; margin-top: 10px;}

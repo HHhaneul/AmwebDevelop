@@ -1,0 +1,123 @@
+데이터 정의어
+- 객체를 생성, 변경, 삭제하는 데이터 정의어
+- DDL(Data Definition Languege)
+	- 데이터의 일관성
+	- 도메인 영역 제약조건(자료형)
+
+	     -엑셀-		      -SQL-
+	상품명 	가격		상품명	가격
+	상품1	천원		상품1	10,000
+	상품2	이천원		상품2	20,000
+	- 데이터 구조 (테이블, 뷰, 시퀀스, 인덱스 ....)
+
+
+	자료형
+		문자
+		고정
+		CHAR(길이): 고정 길이
+			예) 5 - 5bytes
+				국가코드 - 2자리
+				KR
+				JP
+				CN
+		가변
+		VARCHAR2(길이)
+			예) sbject VARCHAR2(255)
+				- 입력한 데이터 크기로 변경
+				- 최대 255
+				- 한줄 텍스트
+
+		CLOB: Character Large OBject
+			- 여러줄 텍스트
+
+		숫자
+		NOMBER(전체자리수, 소수점 자리수)
+		예) SALEPRICE NUMBER(10[,10]): 10자리 정수
+		     DISCOUNT NUMBER(4.2): 총 4자리, 2자리는 소수점 // ex) 20.25
+
+		참고) // 다 비슷하다고 함. 한가지를 확실하게!
+		오라클 - VARCHAR2
+		MySQL - VARCHAR
+		MSSQL - NCHAR
+		PostGreSQL
+		SQLite // 안드로이드 개발? //
+
+		날짜, 시간: DATE
+		
+- 유의점?
+	DML - INSERT, UPDATE, DELETE -> 트랜잭션 수동관리(COMMIT;)
+	DLL - 실행하자마자 COMMIT; -> 복구 불가능
+
+		예)
+		DML - DELETE: 복구 가능(ROLLBACK)
+
+		DLL - TRUNCATE: 복구 불가
+
+1. CREATE TABLE
+	- 테이블 생성
+	
+	CREATE TABLE 테이블명(
+		컬럼명1 자료형 [제약조건],
+		칼럼명2 자료형 [제약조건],
+		...
+	);
+	
+	참고)
+	테이블 -> 대문자
+	         -> 영문(한글 가능 - 지양), 숫자,
+		 특수 문자($, #, _)
+	         -> 숫자는 앞에서 사용 불가
+	         -> 예약어 X
+ same
+	컬럼명 	
+	☆★☆★☆★시험☆★☆★☆★	
+2. ALTER TABLE: 테이블 정의 변경
+	- 컬럼 추가: ADD
+		ALTER TABLE 테이블명 ADD 컬럼명 자료형 [제약조건];
+
+	- 컬럼 변경
+	1) 컬럼명 변경: RENAME COLUMN
+		ALTER TABLE 테이블명 RENAME COLUMN 기존 컬럼명 TO 새로운 컬럼명;
+		- HP -> TEL
+			
+	2) 컬럼 정의 변경: MODIFY
+		ALTER TABLE 테이블명 MODIFY 컬럼명 자료형 [제약조건];
+			
+	- 컬럼 삭제: DROP COLUMN
+		ALTER TABLE 테이블명 DROP COLUMN 삭제할 컬럼명;
+			TEL
+
+3. TRUNCATE
+	- DDL
+	- 테이블 비우기 (전체 삭제)
+	- TRUNCATE TABLE 테이블명;
+
+	참고)
+		DDL은 실행되자마자 COMMIT -> 복구 불가능(ROLLBACK X)
+		DML - DELETE: COMMIT 전이면 복구 가능(ROLLBACK)
+4. RENAME: 테이블명 변경
+	RENAME 기존 테이블명 TO 새로운 테이블명;
+
+5. DROP TABLE: 테이블 삭제 // DDL 복구X
+	DROP TABLE 테이블 명;
+
+☆★시험문제★☆
+6. DESCRIBE 테이블명: 테이블 정의 확인
+	- DESC 테이블명;
+
+☆★시험★☆
+회원정보 테이블 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,306 @@
+SQL문 속 또 다른 SQL문, 서브 쿼리
+
+1. 서브 쿼리(부속질의)
+	SELECT 문 안에 SELECT 문이 포함된 형태
+		1) 스칼라 부속질의: 스칼라 = 단일 값 / SELECT 결과가 단일값으로 나와야하는 경우
+			SELECT 컬럼명 - 단일값, .... FROM .... WHERE 조건식 - 비교 연산
+			SAL > 단일값
+
+		2) 인라인 뷰: 가상의 뷰
+			SELECT .... FROM (SELECT ....)
+
+		3) 상관 부속질의	
+			부모쪽 테이블의 결과, 자식쪽 조건식에서 사용
+		
+2. 실행 결과가 하나인 단일행 서브 쿼리
+	- 스칼라 부속질의
+	
+1) 단일행 서브쿼리가 날짜형 데이터
+	- 20번 부서의 가장 최근 고용한 직원보다 이 후에 고용된 직원
+
+2) 단일행 서브쿼리와 함수
+	AVG(), MAX(), MIN(), COUNT(), SUM(...)
+	- 20번 부서의 평균 급여보다 더 많이 받는 직원
+
+	프로젝션: 컬럼명
+	비교연산자: >, <, >=, <=, =, !=, <>, ^=
+
+3. 실행 결과가 여러개 인 다중행 서브 쿼리
+	- 다중행 연산자
+	- IN: IN(값1, 값2, 값3, ... ) IN에 정의된 값에 일치하는 행이 조회
+	- ANY, SOME: 어떤 값이라도 조건을 만족하면 행 조회(true)
+	- ALL: 모든 값이 조건을 만족하면 행 조회(true)
+	- EXISTS: 서브 쿼리 결과가 있으면 true
+
+
+- 실행 결과 행이 여러개로 나오는 서브쿼리
+- 서브쿼리 결과가 여러 개이므로 단일행 연산자는 사용할 수 없고 다중행 연산자를 사용해야 메인쿼리와 비교할 수 있습니다.
+
+1) IN 연산자
+	- 부서별(GROUP BY) 최고(MAX) 급여
+	SELECT DEPTNO, MAX(SAL) FROM EMP GROUP BY DEPTNO;
+	- 부서별 최고 급여를 받는 직원
+	SELECT * FROM EMP WHERE SAL IN(SELECT MAX(SAL) FROM EMP GROUP BY DEPTNO);
+
+2) ANY, SOME 연산자 // 하나라도 맞으면 되는거임.
+ 	- 30번 부서 사원의 최대 급여보다 더 적은 급여를 받는 직원
+
+3) ALL 연산자 // 모든 조건들이 맞아야함.
+ 	- 30번 부서 사원의 최소/최대 급여보다 더 적은/많은 급여를 받는 직원
+
+4) EXISTS 연산자
+	- 10번 부서: 행이 조회O
+	- 50번 부서 X: 행이 조회 X 
+
+4. 비교할 열이 여러개인 다중열 서브쿼리
+	IN -> 항목 여러개 비교
+	    -> 부서번호, 최대 급여
+
+5. FROM 절에서 사용하는 서브쿼리와 WITH절
+1) WITH절
+2) 상호 연관 서브쿼리
+
+
+6. SELECT 절에 사용하는 서브쿼리
+
+
+
+SELECT * FROM boardDatas b
+	WHERE b.totalComments <> (SELECT COUNT(*) FROM
+		boardComments c WHERE b.id = c.idBoardData);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+SELECT 
+	E.EMPNO, E.ENAME,
+	(SELECT D.DNAME FROM DEPT D WHERE D.DEPTNO = E.DEPTNO) DNAME
+FROM EMP E;
+
+-- 이렇게하면 오류~
+SELECT 
+	E.EMPNO, E.ENAME,
+	(SELECT D.DNAME FROM DEPT D) DNAME
+FROM EMP E;
+
+-- 값의 수가 너무 많음. 오류
+SELECT 
+	E.EMPNO, E.ENAME,
+	(SELECT D.DNAME, D.DEPTNO FROM DEPT D WHERE D.DEPTNO = E.DEPTNO) DNAME
+FROM EMP E;
+
+SELECT * FROM EMP
+	WHERE SAL > (SELECT AVG(SAL) FROM EMP);
+
+SELECT * FROM EMP
+	WHERE SAL > (SELECT AVG(SAL) FROM EMP);
+-- 2개이상!;;
+SELECT * FROM EMP
+	WHERE SAL > (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO);
+-- 인라인 뷰
+SELECT * FROM (SELECT * FROM EMP WHERE DEPTNO IN (20, 30));
+
+SELECT * FROM (SELECT EMPNO, ENAME, JOB FROM EMP WHERE DEPTNO IN (20, 30));
+
+SELECT * FROM (SELECT EMPNO, ENAME, JOB FROM EMP WHERE DEPTNO IN (20, 30)) E 
+WHERE E. JOB = 'SALESMAN';
+
+SELECT E.EMPNO, E.ENAME, E.MGR
+FROM (SELECT EMPNO, ENAME, JOB FROM EMP WHERE DEPTNO IN (20, 30)) E 
+WHERE E. JOB = 'SALESMAN';
+
+WITH E AS (SELECT EMPNO, ENAME, JOB FROM EMP WHERE DEPTNO IN (20, 30))
+SELECT E.EMPNO, E.ENAME
+FROM E 
+WHERE E.JOB = 'SALESMAN';
+
+SELECT * FROM EMP ORDER BY DEPTNO;
+
+-- 20번 부서의 가장 최근 고용한 직원보다 이 후에 고용된 직원
+SELECT * FROM EMP WHERE 
+	HIREDATE > (SELECT MAX(HIREDATE) FROM EMP WHERE DEPTNO=30); 
+
+-- 20번 부서의 평균 급여보다 더 많이 받는 직원
+SELECT * FROM EMP WHERE 
+	SAL < (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = 20); 
+
+-- 부서별(GROUP BY) 최고(MAX) 급여
+SELECT DEPTNO, MAX(SAL) FROM EMP GROUP BY DEPTNO;
+-- 부서별 최고 급여를 받는 직원
+SELECT * FROM EMP WHERE SAL IN(SELECT MAX(SAL) FROM EMP GROUP BY DEPTNO);
+
+-- 30번 부서 사원의 최대 급여보다 적은 급여를 받는 직원
+SELECT * FROM EMP WHERE SAL < (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = 30) ORDER BY EMPNO;
+
+-- 30번 부서 사원의 최대 급여보다 적은 급여를 받는 직원 ANY SOME 연산자 사용
+SELECT * FROM EMP WHERE SAL < ANY(SELECT SAL FROM EMP WHERE DEPTNO = 30) ORDER BY EMPNO;
+
+SELECT * FROM EMP WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE DEPTNO = 30) ORDER BY EMPNO;
+
+SELECT * FROM EMP WHERE SAL < SOME(SELECT SAL FROM EMP WHERE DEPTNO = 30) ORDER BY EMPNO;
+
+SELECT * FROM EMP WHERE SAL > ANY(SELECT SAL FROM EMP WHERE DEPTNO = 30) ORDER BY SAL;
+
+
+SELECT * FROM EMP;
+
+SELECT SAL FROM EMP WHERE DEPTNO = 30 ORDER BY SAL DESC;
+
+-- 30번 부서 사원의 최소 급여보다 더 적은 급여를 받는 직원
+SELECT * FROM EMP WHERE SAL < ALL(SELECT SAL FROM EMP WHERE DEPTNO = 30);
+
+SELECT SAL FROM EMP WHERE DEPTNO = 30 ORDER BY SAL;
+
+-- 30번 부서 사원의 최대 급여보다 더 많은 급여를 받는 직원
+SELECT * FROM EMP WHERE SAL > ALL(SELECT SAL FROM EMP WHERE DEPTNO = 30);
+SELECT * FROM EMP WHERE SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = 30);
+-- EXISTS 설정한 n번 열이 있으면 참! 조회 ㄱㄱ
+SELECT * FROM EMP WHERE EXISTS(SELECT * FROM DEPT WHERE DEPTNO = 10);
+-- 부서별로 가장 최대 급여를 받고 있는 직원
+SELECT * FROM EMP WHERE (DEPTNO, SAL) IN(SELECT DEPTNO, MAX(SAL) FROM EMP GROUP BY DEPTNO);
+
+SELECT E.EMPNO, E.ENAME,
+	(SELECT D.DNAME FROM DEPT D WHERE D.DEPTNO = E.DEPTNO) DNAME	
+FROM EMP E;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

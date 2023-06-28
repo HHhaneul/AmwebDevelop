@@ -1,0 +1,227 @@
+다중행 함수와 데이터 그룹화
+- 하나의 열에 출력 결과를 담는 다중행 함수
+- 여러 행의 결과 -> 하나의 행의 결과
+- 통계 관련 함수
+
+1. SUM: 합계
+2. COUNT: 행의 갯수
+3.
+- MAX: 최대값
+- MIX: 최솟값
+
+4. AVG: 평균
+
+- 연산에서 NULL은 제외
+
+집계함수([ALL - 기본값 | DISTINCT - 유일한 값] 컬럼명)
+
+결과값을 원하는 열로 묶어 출력하는 GROUP BY절
+- 특정 칼럼의 같은 값으로 묶어주는 주는 구문
+- 통계(집계) 함수와 함께 많이 사용
+
+1. GROUP BY 절의 기본 사용법
+SELECT
+FROM 테이블명
+WHERE ㅈ조건식
+GROUP BY 그룹활 칼럼명(여러개 지정)
+
+ORDER BY ....
+
+2. GROUP BY절을 사용할 때 유의점
+	- 컬럼명 반드시 GROUP BY에 사용된 컬럼명만 조회 가능
+
+3. HAVING절
+	- 통계(집계) 함수는 WHERE절에서 사용 불가
+	- 통계(집계) 함수의 조건식 HAVING 절에서 사용 가능
+	
+1) 기본 사용법
+2) 유의법
+- WHERE절은 출력 대상 행을 제한하고, HAVING절은 그룹화된 대상을 출력에서 제한
+
+그룹화 관련 함수
+1. ROLLUP
+
+2. CUBE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+
+SELECT * FROM EMP;
+
+
+SELECT SUM(SAL) "급여 총합",
+	   ROUND(AVG(SAL)) "급여 평균",
+	   MIN(SAL) "최소 급여",
+	   MAX(SAL) "최대 급여",
+	   COUNT(*) 직원수
+	FROM EMP;
+
+
+SELECT COUNT(COMM) "커미션을 받는 직원수" FROM EMP;
+ -- 중복포함 --
+SELECT COUNT(MGR) "관리자 수" FROM EMP; 
+ -- 중복 제외 -- 
+SELECT COUNT(DISTINCT MGR) "관리자 수" FROM EMP; 
+
+SELECT * FROM EMP;
+
+SELECT DISTINCT DEPTNO FROM EMP;
+
+SELECT ROUND(AVG(SAL)) 평균급여, '10' DEPTNO FROM EMP WHERE DEPTNO = 10
+UNION ALL
+SELECT ROUND(AVG(SAL)) 평균급여, '20' DEPTNO FROM EMP WHERE DEPTNO = 20
+UNION ALL
+SELECT ROUND(AVG(SAL)) 평균급여, '30' DEPTNO FROM EMP WHERE DEPTNO = 30;
+
+SELECT * FROM EMP;
+
+SELECT DISTINCT DEPTNO FROM EMP;
+
+SELECT ROUND(AVG(SAL)) 평균급여, DEPTNO FROM EMP GROUP BY DEPTNO;
+
+-- 10개의 부서 3명 급여 -> 한개 AVG
+
+SELECT * FROM EMP WHERE AVG(SAL) > 2000;
+
+SELECT DEPTNO, JOB, SUM(SAL), AVG(SAL) FROM EMP GROUP BY DEPTNO, JOB;
+
+
+SELECT DEPTNO, JOB, SUM(SAL), AVG(SAL)
+	FROM EMP GROUP BY DEPTNO, JOB HAVING AVG(SAL) >= 2000;
+
+SELECT DEPTNO, JOB, SUM(SAL), AVG(SAL)
+	FROM EMP WHERE SAL < 2000 GROUP BY DEPTNO, JOB HAVING AVG(SAL) >= 2000;
+
+SELECT DEPTNO, JOB,
+		COUNT(*) 직원수,
+		MAX(SAL) 최대급여,
+		MIN(SAL) 최소급여,
+		SUM(SAL) 합계,
+		ROUND(AVG(SAL)) 평균
+	FROM EMP
+	GROUP BY ROLLUP (DEPTNO, JOB);
+
+SELECT DEPTNO, JOB,
+		COUNT(*) 직원수,
+		MAX(SAL) 최대급여,
+		MIN(SAL) 최소급여,
+		SUM(SAL) 합계,
+		ROUND(AVG(SAL)) 평균
+	FROM EMP
+	GROUP BY CUBE (DEPTNO, JOB);
+
+-----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

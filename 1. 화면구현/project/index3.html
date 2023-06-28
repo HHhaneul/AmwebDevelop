@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, initial-scale=1.0,maximum-scale=3.0,minimum-scale=0.5">
+        <title>코리아채용</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style3.css">
+        <script src="js/common.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="head1">
+                <ul>
+                    <!--헤더1로고-->
+                    <li class="head1_logo">
+                        <a href="#">
+                        <img src="images/logo.png" alt="상단로고">
+                        </a>
+                    </li>
+                    <!--헤더1로고-->
+                    <!--헤더1검색창-->
+                    <li class="head1_search">
+                        <label>
+                            <input type="text" id="stext" title="검색어 입력" placeholder="검색어 입력">
+                            <button>
+                                <a href="#">
+                                    <img src="images/search_logo.png" alt="돋보기">
+                                </a>
+                            </button>
+                        </label>
+                    </li>
+                    <!--헤더1검색창-->
+                    <!--헤더1로그인/회원가입/내정보-->
+                    <li class="header_login">
+                        <div>
+                            <a href="#">로그인</a>
+                        </div>
+                        <div>
+                            <a href="#">회원가입</a>
+                        </div>
+                        <div>
+                            <a href="#">
+                            <img src="images/my_info2.png" 
+                        style="border-radius: 15px;" alt="마이페이지">
+                            </a>
+                        </div>
+                    </li>
+                    <!--헤더1로그인/회원가입/내정보-->
+                </ul>
+            </div>
+            <div class="head2_bg">
+                <a href="#">
+                    <img src="images/main_bg.png" alt="메인배너" class="head_bg">
+                </a>
+            </div>
+        </header>
+        <main>
+            <!--좌측 카테고리-->
+            <div class="left_bar">
+                <div>
+                <div>
+                    TOP100
+                    <ul>
+                        <li><a href="#">직무별</a></li>
+                        <li><a href="#">전공별</a></li>
+                        <li><a href="#">학력별</a></li>
+                    </ul>
+                </div>
+                <br>
+                <div>
+                    공채
+                    <ul>
+                        <li><a href="#">1000대기업 공채속보</a></li>
+                        <li><a href="#">공채달력</a></li>
+                    </ul>
+                </div>
+                <br>
+                <div>
+                    기업별
+                    <ul>
+                        <li><a href="#">대기업</a></li>
+                        <li><a href="#">중견·강소기업</a></li>
+                        <li><a href="#">외국계 기업</a></li>
+                        <li><a href="#">공기업·공사</a></li>
+                        <li><a href="#">상장기업</a></li>
+                    </ul>
+                </div>
+                <br>
+                <div>
+                    학력별
+                    <ul>
+                        <li><a href="#">고졸채용</a></li>
+                        <li><a href="#">대학(2,3년제) 채용</a></li>
+                        <li><a href="#">대학(4년제) 채용</a></li>
+                        <li><a href="#">석박사 우대</a></li>
+                    </ul>
+                </div>
+                <br>
+                <div>상세조건별
+                    <ul>
+                    <li><a href="#">해외지역</a></li>
+                    <li><a href="#">직급/직책별</a></li>
+                    <li><a href="#">전공계열변</a></li>
+                    <li><a href="#">우대조건별</a></li>
+                    <li><a href="#">자격증별</a></li>
+                    <li><a href="#">복리후생별</a></li>
+                    </ul>
+                </div>
+                <br>
+                    <a href="#">
+                        <img src="images/leftbg.png" alt="좌측배너">
+                    </a>
+                </div>
+            </div>
+            <!--좌측 카테고리-->
+            <div class="category">
+                <div>
+                    <a href="#">채용정보</a>
+                </div>
+                <div>
+                    <a href="#">신입인턴</a>
+                </div>
+                <div>
+                    <a href="#">기업연봉</a>
+                </div>
+                <div>
+                    <a href="#">커뮤니티</a>
+                </div>
+                <div>
+                    <a href="#">이벤트</a>
+                </div>
+                <div>
+                    <a href="#">고객센터</a>
+                </div>
+            </div>
+            <div class="search">
+            <div class="search_top">
+                <h2>채용공고 상세검색 🔍</h2>
+            </div>
+            <div class="search_category">
+                <!--서치카테고리-->
+                <div class="category_1">
+                    <a href="#">
+                        <div>
+                            직무
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            근무지역
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                           경력
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            학력
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            기업형태
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            고용형태
+                        </div>
+                    </a>
+                </div>
+                <!--서치카테고리-->
+                <!--체크박스롤-->
+                <div class="category_check">
+                        <div>
+                        <input type="checkbox">기획·전략<br>
+                        <input type="checkbox">법무·사무·총무<br>
+                        <input type="checkbox">인사·HR<br>
+                        <input type="checkbox">회계·세무<br>
+                        <input type="checkbox">마케팅·광고·MD<br>
+                        <input type="checkbox">개발·데이터<br>
+                        <input type="checkbox">디자인<br>
+                        <input type="checkbox">물류·무역<br>
+                        <input type="checkbox">운전·운송·배송<br>
+                        <input type="checkbox">영업<br>
+                        <input type="checkbox">고객상담·TM<br>
+                        <input type="checkbox">금융·보험<br>
+                        <input type="checkbox">식·음료<br>
+                        <input type="checkbox">고객서비스·리테일<br>
+                        <input type="checkbox">엔지니어링·설계<br>
+                        <input type="checkbox">제조·생산<br>
+                        <input type="checkbox">교육<br>
+                        <input type="checkbox">건축·시설<br>
+                        <input type="checkbox">의료·바이오<br>
+                        <input type="checkbox">미디어·문화·스포츠<br>
+                        <input type="checkbox">공공·복지<br>
+                    </div>
+                    <div>
+                        <input type="checkbox">서울특별시<br>
+                        <input type="checkbox">경기도<br>
+                        <input type="checkbox">인천광역시<br>
+                        <input type="checkbox">대전광역시<br>
+                        <input type="checkbox">세종특별자치시<br>
+                        <input type="checkbox">충청남도<br>
+                        <input type="checkbox">충청북도<br>
+                        <input type="checkbox">광주광역시<br>
+                        <input type="checkbox">전라남도<br>
+                        <input type="checkbox">전라북도<br>
+                        <input type="checkbox">대구광역시<br>
+                        <input type="checkbox">경상북도<br>
+                        <input type="checkbox">부산광역시<br>
+                        <input type="checkbox">울산광역시<br>
+                        <input type="checkbox">경상남도<br>
+                        <input type="checkbox">강원도<br>
+                        <input type="checkbox">제주특별자치도<br>
+                        <input type="checkbox">전국<br>
+                        <input type="checkbox">아시아·중동<br>
+                        <input type="checkbox">중국·홍콩<br>
+                        <input type="checkbox">일본<br>
+                        <input type="checkbox">미국<br>
+                        <input type="checkbox">북아메리카<br>
+                        <input type="checkbox">남아메리카<br>
+                        <input type="checkbox">유럽<br>
+                        <input type="checkbox">오세아니아<br>
+                        <input type="checkbox">아프리카<br>
+                    </div>
+                    <div>
+                        <input type="checkbox">신입<br>
+                        <input type="checkbox">1~3년<br>
+                        <input type="checkbox">4~6년<br>
+                        <input type="checkbox">회계·세무<br>
+                        <input type="checkbox">7~9년<br>
+                        <input type="checkbox">10~15년<br>
+                        <input type="checkbox">16~20년<br>
+                        <input type="checkbox">21년 이상<br>
+                        <input type="checkbox">경력무관
+                    </div>
+                    <div>
+                        <input type="checkbox">대학교졸업(4년)<br>
+                        <input type="checkbox">대학졸업(2,3년)<br>
+                        <input type="checkbox">대학원 석사졸업<br>
+                        <input type="checkbox">대학원 박사졸업<br>
+                        <input type="checkbox">마케팅·광고·MD<br>
+                        <input type="checkbox">고등학교졸업<br>
+                        <input type="checkbox">학력무관
+                    </div>
+                    <div>
+                        <input type="checkbox">대기업<br>
+                        <input type="checkbox">30대그룹사<br>
+                        <input type="checkbox">매출1000대기업<br>
+                        <input type="checkbox">중견기업<br>
+                        <input type="checkbox">강소기업<br>
+                        <input type="checkbox">외국계기업<br>
+                        <input type="checkbox">중소기업<br>
+                        <input type="checkbox">벤처기업<br>
+                        <input type="checkbox">공공기관·공기업<br>
+                        <input type="checkbox">비영리단체·협회재단<br>
+                        <input type="checkbox">외국기관·단체<br>
+                        <input type="checkbox">주권상장<br>
+                        <input type="checkbox">코스닥상장<br>
+                        <input type="checkbox">코넥스상장<br>
+                        <input type="checkbox">해외상장
+                    </div>
+                    <div>
+                        <input type="checkbox">정규직<br>
+                        <input type="checkbox">계약직<br>
+                        <input type="checkbox">인턴<br>
+                        <input type="checkbox">파견직<br>
+                        <input type="checkbox">도급<br>
+                        <input type="checkbox">프리랜서<br>
+                        <input type="checkbox">아르바이트<br>
+                        <input type="checkbox">연수생/교육생<br>
+                        <input type="checkbox">병역특례<br>
+                        <input type="checkbox">위촉직/개인사업자
+                    </div>
+                </div>
+                <!--체크박스롤-->
+                <!--서치카테고리-->
+                <div class="category_1">
+                    <a href="#">
+                        <div>
+                            산업
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            직급/직책/급여
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                           우대전공
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            자격증
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            우대전공
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div>
+                            복리후생
+                        </div>
+                    </a>
+                </div>
+                <!--서치카테고리-->
+                <div>
+                    <h1 style="margin-left: 20px;">검색결과</h1>
+                </div>
+            <div class="search_result">
+                <!--채용관-->
+                <ul class="vvip">
+                    <li class="vvip_line">
+                        <a href="#">
+                            <div>
+                                <img src="images/coupang.gif" alt="쿠팡">
+                            </div>
+                            <br>
+                            <span class="vvip_main">쿠팡 주식회사</span>
+                            <br>
+                            <span class="vvip_main_info">[쿠팡]이츠 - (인센티브 포함 최대 7000 가능) Sales 담당자</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/agoda.gif" alt="아고다">
+                            </div>
+                            <br>
+                            <span class="vvip_main">아고다</span>
+                            <br>
+                            <span class="vvip_main_info">[대규모 확장] 아고다 CX Specialist 정규직 채용 (재택근무 병행) Sales 담당자</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/apple.gif" alt="애플코리아">
+                            </div>
+                            <br>
+                            <span class="vvip_main">애플코리아(유)</span>
+                            <br>
+                            <span class="vvip_main_info">애플스토어 신입/경력직 모집</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/canon.gif" alt="캐논">
+                            </div>
+                            <br>
+                            <span class="vvip_main">캐논코리아(주)</span>
+                            <br>
+                            <span class="vvip_main_info">캐논코리아 안산사업소 생산부문 대규모 채용</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/CJ.gif" alt="씨제이">
+                            </div>
+                            <br>
+                            <span class="vvip_main">씨제이올리브영</span>
+                            <br>
+                            <span class="vvip_main_info">[CJ올리브영] 매장 신입직원 채용(전국)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/dillivery.gif" alt="우아한형제들">
+                            </div>
+                            <br>
+                            <span class="vvip_main">㈜우아한형제들</span>
+                            <br>
+                            <span class="vvip_main_info">각 부문별 경력/신입 인재영입</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/gs.gif" alt="GS">
+                            </div>
+                            <br>
+                            <span class="vvip_main">GS리테일</span>
+                            <br>
+                            <span class="vvip_main_info">대외협력부문 컴플라이언스파트 신입 사내 변호사 채용</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/hyundai.gif" alt="현대자동차">
+                            </div>
+                            <br>
+                            <span class="vvip_main">현대자동차㈜</span>
+                            <br>
+                            <span class="vvip_main_info">연구개발, 생산/제조 부문 경력직 채용</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/jabkorea.gif" alt="잡코리아">
+                            </div>
+                            <br>
+                            <span class="vvip_main">잡코리아(유)</span>
+                            <br>
+                            <span class="vvip_main_info">전략기획 경력직 채용 (3년 이상)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/nexon.gif" alt="넥슨">
+                            </div>
+                            <br>
+                            <span class="vvip_main">㈜넥슨</span>
+                            <br>
+                            <span class="vvip_main_info">[글로벌보안본부] 게임보안 채용형 인턴십</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/prada.gif" alt="프라다">
+                            </div>
+                            <br>
+                            <span class="vvip_main">프라다 코리아 유한회사</span>
+                            <br>
+                            <span class="vvip_main_info">프라다코리아 백화점&면세점 - 신입/경력 매장직원 채용</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <img src="images/toss.gif" alt="토스">
+                            </div>
+                            <br>
+                            <span class="vvip_main">토스씨엑스㈜</span>
+                            <br>
+                            <span class="vvip_main_info">IT Manager 채용</span>
+                        </a>
+                    </li>
+                </ul>
+                <!--채용관-->
+            </div>
+        </div>
+
+        </main>
+        <footer>
+            <!--하단 배너-->
+            <div class="foot_table">
+                <a href="#" class="foot_table_mid">
+                    신입/정규직
+                    <br>
+                    <span style="font-weight: bold;">연봉3천이상 채용정보</span>
+                </a>
+                    <a href="#">
+                        <img src="images/footerbg.png" alt="하단배너">
+                    </a>
+                <a href="#" class="foot_table_mid">
+                    서울시 거주 여성이라면?
+                    <br>
+                    <span style="font-weight: bold;">웹툰제작 취업하러 가자!</span>
+                </a>
+            </div>
+            <!--하단 배너-->
+            <!--하단 메뉴-->
+            <div class="foot_menu">
+                <ul>
+                    <li>
+                        <a href="#">
+                            회사소개
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            운영사이트
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            이용약관
+                        </a>
+                    </li>
+                    <li style="font-weight: bold;">
+                        <a href="#">
+                            개인정보처리방침
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            광고문의
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            제휴문의
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            고객센터
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--하단 메뉴-->
+            <!--하단 정보-->
+            <div class="company_info">
+                    <div>
+                        고객센터 1588-9350 (평일 09:00 ~ 19:00 토요일 09:00 ~ 15:00) FAX 010-6248-0364 Email toy5698@naver.com 
+                    </div>
+                    <div>
+                        인천광역시 부평구 시장로 7 5층 잡코리아 대표 : 최성우  사업자등록번호 : 333-87-02608
+                    </div>
+            </div>
+            <div class="foot_source">
+            </div>
+            <!--하단 정보-->
+        </footer>
+        <!--푸터-->
+        </body>
+    </html>

@@ -1,0 +1,15 @@
+
+SCOTT 들어가기 위한 명령어
+
+// ALTER USER SCOTT IDENTIFIED BY tiger ACCOUNT UNLOCK; //
+
+dbeaver 들어가기 아니오아니오아니오
+
+Connect to a database
+
+Libraries -> Download/Update
+
+다운 완료 후 -> Test Connection
+
+똑같이 SCOTT계정도 새로만들기.
+

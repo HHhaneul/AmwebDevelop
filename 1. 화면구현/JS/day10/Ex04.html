@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script>
+            window.addEventListener("DOMContentLoaded", function(){
+                const _openWin = document.getElementById("openWin");
+                const _moveTo = document.getElementById("moveTo");
+                const _moveBy = document.getElementById("moveBy");
+                const _resizeTo = document.getElementById("resizeTo");
+                const _resizeBy = document.getElementById("resizeBy");
+
+                _openWin.addEventListener("click", function(){
+                    const w = open("ex03.html", "win", "width=500, height = 500")
+
+                    _moveTo.addEventListener("click", function(){
+                        w.moveTo(300,300);
+                    });
+
+                    _moveBy.addEventListener("click", function(){
+                        w.moveBy(30,30);
+                    });
+
+                    _resizeTo.addEventListener("click", function(){
+                        w.resizeTo(200,200);
+                    });
+
+                    _resizeBy.addEventListener("click", function(){
+                        w.resizeBy(30,30);
+                    });
+                });
+            });
+        </script>
+        <button tupe="button" id="openWin">open</button>
+        <button type="button" id="moveTo">moveTo(300, 300)</button>
+        <button type="button" id="moveBy">moveBy(30, 30)</button>
+        <button type="button" id="resizeTo">resizeTo(200, 200)</button>
+        <button type="button" id="resizeBy">resizeTo(30, 30)</button>
+    </body>
+</html>

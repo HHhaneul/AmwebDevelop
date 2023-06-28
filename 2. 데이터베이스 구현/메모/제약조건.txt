@@ -1,0 +1,551 @@
+제약조건
+1. 제약 조건이란?
+- 제약 조건을 지정한 열에 제약 조건에 부합하지 않는 데이터를 저장할 수 없습니다.
+
+참고)
+관계형 데이터베이스
+	테이블간의 관계(공통 값)
+	
+회원 엑셀 파일
+	회원아이디	회원이름		주소
+	user01		최이름		주소1
+	user02		김이름		주소2
+
+
+주문 엑셀 파일
+	주문번호		회원아이디	주문상품		
+	1		user01		상품1		
+	2		user02		상품2	
+
+-- 아이디를 기준으로 잡아 주문 엑셀 파일에 회원이름을 가지고 온다.
+
+
+2. 제약 조건 종류
+- NOT NULL: NULL을 미허용: 반드시 값을 입력해야 하는 항목 -- 필수사항
+- UNIQUE: 중복이 허용되지 않는 제약조건 (NULL 중복 제외)
+- PREMARY KEY: 기본키: 테이블의 각 행을 대표하는 항목
+- FOREIGN KEY: 외래키: 다른 테이블 참조 하는 키 + 참조 무결성 제약조건
+- CHECK: 수식, 조건 통제, CHECK (age >= 18)
+
+참고)
+	키
+	후보키: 각 행을 표할 수 있는 후보 항목 (개개인의 고유값)
+	예)
+		이름	전화번호	휴대전화번호 	주소	주민번호
+		
+
+	후보1:	주민번호
+	후보2:	이름 + 전화번호 + 휴대전화번호
+	후보3:	이름 + 전화번호 + 주소
+	후보4:	이름 + 휴대전화번호
+		
+
+	기본키: 여러 후보키 중에서 선택된 키
+		주민번호 선택! --한국은 개인정보에 민감... 주민번호 자체로 사용하지는 않음 그렇기에 대리키 사용
+		
+	대리키: + 증감번호 - 기본키로 선정하기 마땅한 후보키가 없는 경우
+
+	외래키: 다른 테이블의 기본키를 참조하는 컬럼 ☆★테이블관의 관계☆★
+	
+
+3. 데이터 무결성이란?
+- 데이터베이스에 저장되는 데이터의 ★정확성과 일관성★을 보장한다는 의미
+- 제약 조건은 이러한 데이터 무결성을 지키기 위한 안전장치로서 중요한 역할
+
+1) 영역 무결성(domain integritu)
+	- 자료형: 동일한 자료형으로 값을 유지
+		숫자가 필수인 항목 숫자로만 한정
+		
+2) 개체 무결성(entity integrity)
+	- 기본키: - 각 행을 대표 - UNIQUE + NOT NULL
+
+3) 참조 무결성(referential integrty)
+	- 외래키 제약조건
+		- 부모테이블에 자식 테이블 데이터가 있으면 삭제 불가.
+
+4. 빈값을 허락하지 않는 NOT NULL
+	- 필수 항목
+	예) 회원 테이블 --말그대로 필수!
+		- 아이디
+		- 비밀번호
+		- 회원명
+		..
+
+	참고)
+		CREATE TABLE 테이블명(
+			컬럼명 자료형 [제약 조건 - NULL | NOT NULL | UNIQUE | DEFAULT ... | CHECK ...]
+		);
+
+		ALTER TABLE 테이블 MODIFY 컬럼명 자료형 [제약조건]
+
+		컬럼의 제약조건은 0개 이상 지정
+
+5. 제약 조건 확인
+- USER_CONSTRAINTS
+- USER_CONS_COLUMNS: 제약조건이 부여된 컬럼명
+
+SELECT * FROM USER_CONSTRAINTS;
+
+6. 제약 조건 이름 직접 지정
+	CONSTRAINT 제약조건명
+
+7. 이미 생성한 테이블에 제약 조건 지정
+
+8. 제약 조건 삭제
+
+ARTER TABLE 테이블 명 DROP CONSTRAINT 제약조건명;
+
+중복되지 않는 값 UNIQUE
+
+1. 테이블을 생성하여 제약 조건 지정
+
+2. 제약 조건 확인
+3. 중복을 허락하지 않는 UNIQUE
+4. UNIQUE 제약 조건과 NULL 값
+	- UNIQUE: 중복 값을 허용 X , NULL은 중복 허용: 테이블을 대표하는 키 될 수 없다.
+5. 테이블 생성하며 제약 조건 이름 직접 지정
+
+6. 이미 생성한 테이블에 제약 조건 지정
+
+7. 제약조건 삭제
+ALTER TABLE 테이블명 DROP CONSTRAINT 제약조건 명
+
+
+
+
+
+참고)
+	반이름	이름	번호	
+	1	이름1	번호1
+	2	이름2	번호2
+
+
+
+
+유일하게 하나만 있는 값 PRIMARY KEY
+- UNIQUE와 NOT NULL 제약 조건의 특성을 모두 가지는 제약 조건
+- 테이블에 하나밖에 지정할 수 없습니다.
+- 개체 무결성 제약조건
+- 자동 인덱스가 생성
+
+1. 테이블을 생성하며 제약 조건 지정하기
+2. 테이블 생성하며 제약 조건 이름 직접 지정하기
+3. PRIMARY KEY 제약 조건을 지정한 열 확인(중복 값을 입력했을 때)
+4. PRIMARY KEY 제약 조건을 지정한 열 확인
+5. CREATE문에서 제약 조건을 지정하는 다른 방식
+- 기본키: 여러 컬럼 조합 가능
+
+
+
+
+참고)
+CONSTRAINT_TYPE
+	C: 일반 제약조건 - NOT NULL, CHECK ...
+	U: UNIQUE 제약조건
+	P: PRIMARY KEY 제약조건
+	R: FOREIGN KEY 제약조건
+
+
+다른 테이블과 관계를 맺는 FOREIGN KEY: 외래키
+- 서로 다른 테이블 간 관꼐를 정의하는 데 사용하는 제약 조건
+- 지정한 열을 다른 테이블의 특정 열에서 참조하겠다는 의미
+- 참조 무결성 제약조건
+
+10~40, 50?
+
+참고)
+	외래키가 있는 테이블 - 자식 테이블 (EMP - DEPTNO)
+	외래키가 참조하는 기본키를 소유한 테이블 - 부모 테이블 (DEPT - DEPTNO)
+
+1. FOREIGN KEY 지정하기
+	CREATE TABLE 테이블명(
+		컬럼명 자료형 [CONSTRAINT 제약조건명] REFERENCES 참조 테이블 (참조할 컬럼명)
+	);
+
+2. FOREIGN KEY로 참조 행 데이터 삭제하기
+	- 참조 무결성 제약조건: 부모 테이블에 자식 레코드가 존재하면 부모 데이터 삭제 불가
+				(자식 데이터를 먼저 삭제 -> 부모 삭제)
+	- ON DELETE NO ACTION
+
+	- ON DELETE CASCADE: 부모 테이블 데이터 삭제 되면 -> 자식 데이터도 연쇄 삭제
+	- ON DELETE SET NULL: 부모 테이블 데이터가 삭제 되면 -> 자식 데이터 외래키 값 NULL 변경
+
+데이터 형태와 범위를 정하는 CHECK
+- 열에 저장할 수 있는 값의 범위 또는 패턴을 정의할 때 사용하는 제약 조건
+
+
+기본값을 정하는 DEFAULT
+REG_DT 현재시간 자동
+
+DEFAULT
+
+
+제약조검
+1. 데이터 형태와 범위를 정하는 CHECK
+
+참고)
+
+	LENGTH(컬럼명): 글자의 개수 (UTF-8 한글 1자 - 3바이트)
+	LENGTHB(컬럼명): 바이트 수
+
+	mysql
+		- LENGTH(컬럼명): 바이트 수
+		- LENGTH_CHAR(컬럼명): 글자수
+
+2. 제약 조건 비활성화, 활성화
+
+비활성화
+	ALTER TABLE 테이블명 DISABLE CONSTRAINT 제약조건명;
+
+활성화
+	ALTER TABLE 테이블명 ENABLE CONSTRAINT 제약조건명;
+
+3. 기본값
+	DEFAULT SYSDATE - 현재 날짜
+
+SELECT 문의 기본 형식
+
+1. 실습용 테이블 살펴보기
+
+2. 데이터를 조회하는 3가지 방법
+- 셀렉션
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+CREATE TABLE TABLE_NOTNULL (
+	LOGIN_ID VARCHAR2(20) NOT NULL,
+	LOGIN_PW VARCHAR2(20) NOT NULL,
+	TEL VARCHAR2(20)
+);
+
+SELECT * FROM TABLE_NOTNULL;
+-- 제약조건 조회 // 테이블 NOTNULL의 제약조건만 조회하기.
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TABLE_NOTNULL';
+
+INSERT INTO TABLE_NOTNULL VALUES('USER01', '12345', '010-0000-0000');
+
+--SELECT * FROM USER_IND_COLUMNS; // 쉬는 시간에 다시!
+
+INSERT INTO TABLE_NOTNULL (LOGIN_ID, LOGIN_PW) VALUES ('USER02', '12345');
+
+-- 수정도 제약조건에 맞지 않으면 안댐.
+UPDATE TABLE_NOTNULL 
+	SET
+		LOGIN_PW = NULL
+	WHERE LOGIN_ID = 'USER01';
+-- 제약조건의 이름을 만들어주었음.
+CREATE TABLE TABLE_NOTNULL2 (
+	LOGIN_ID VARCHAR2(20) CONSTRAINT TBNN2_LID_NN NOT NULL,
+	LOGIN_PW VARCHAR2(20) CONSTRAINT TBNN2_LPW_NN NOT NULL,
+	TEL VARCHAR2(20)
+);
+
+SELECT * FROM TABLE_NOTNULL2;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TABLE_NOTNULL2';
+-- 제약조건 수정
+ALTER TABLE TABLE_NOTNULL2 MODIFY TEL NOT NULL;
+-- 값이 없는게 하나라도 있으면 제약조건 변경 불가능
+ALTER TABLE TABLE_NOTNULL MODIFY TEL NOT NULL;
+-- 전화번호를 추가해준 후 NULL값을 없애주고 변경!
+UPDATE TABLE_NOTNULL
+	SET
+		TEL='010-0000-0000'
+	WHERE LOGIN_ID = 'USER02';
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME='TABLE_NOTNULL2';
+-- 제약조건 삭제!
+ALTER TABLE TABLE_NOTNULL2 DROP CONSTRAINT TBNN2_TEL_NN;
+
+ALTER TABLE TABLE_NOTNULL2 MODIFY TEL CONSTRAINT TBNN2_TEL_NN NOT NULL;
+
+SELECT * FROM TABLE_NOTNULL;
+
+INSERT INTO TABLE_NOTNULL VALUES ('USER01', '12345', '010-0000-0000');
+------------------------------------------------------------------------------------------------------
+CREATE TABLE TABLE_UNIQUE(
+	LOGIN_ID VARCHAR2(20) CONSTRAINT TBUQ_LID_UQ UNIQUE,
+	LOGIN_PWD VARCHAR2(20) CONSTRAINT TBUQ_LPWD_NN UNIQUE,
+	TEL VARCHAR2(20)
+);
+
+SELECT * FROM TABLE_UNIQUE;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TABLE_UNIQUE';
+
+INSERT INTO TABLE_UNIQUE VALUES ('USER01', '12345', '010-0000-0000');
+INSERT INTO TABLE_UNIQUE VALUES (NULL, '12345', '010-0000-0000');
+
+SELECT * FROM TABLE_UNIQUE;
+
+------------------------------------------------------------------------------------------------------
+CREATE TABLE CLASSROOM(
+	CLASS_NUM NUMBER(2),
+	NAME VARCHAR2(20),
+	SNUM NUMBER(2),
+	CONSTRAINT CLSRM_UQ UNIQUE(CLASS_NUM, NAME, SNUM)
+);
+
+SELECT * FROM CLASSROOM;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'CLASSROOM';
+-- 제약조건이 부여된 컬럼 조회
+SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME = 'CLASSROOM';
+
+INSERT INTO CLASSROOM VALUES (2, '이이름', 11);
+
+SELECT * FROM CLASSROOM;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TABLE_UNIQUE';
+
+ALTER TABLE TABLE_UNIQUE DROP CONSTRAINT TBUQ_LID_UQ;
+
+-- 자동 인덱스 생성
+SELECT * FROM USER_INDEXES;
+
+SELECT * FROM TABLE_UNIQUE;
+------------------------------------------------------------------------------------------------------
+테이블 명세 - 다른 개발자가 봐도 충분히 만들 수 있는 자세한 정보
+
+엑셀 참조
+------------------------------------------------------------------------------------------------------
+CREATE TABLE TABLE_PK (
+	LOGIN_ID VARCHAR2(20) CONSTRAINT TBPK_PK PRIMARY KEY,
+	LOGIN_PWD VARCHAR2(20) CONSTRAINT TBPK_LPWD_NN NOT NULL,
+	TEL VARCHAR2(20)
+);
+
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TABLE_PK';
+
+INSERT INTO TABLE_PK VALUES('USER01', '12345', '010-0000-0000');
+-- NULL값 안댐
+INSERT INTO TABLE_PK VALUES(NULL, '12345', '010-0000-0000');
+
+SELECT * FROM TABLE_PK;
+
+INSERT INTO CLASSROOM VALUES (NULL,NULL,NULL);
+
+SELECT * FROM CLASSROOM;
+
+CREATE TABLE CLASSROOM2 (
+	CLASS_NUM NUMBER(2),
+	NAME VARCHAR2(20),
+	SNUM NUMBER(2),
+	CONSTRAINT CLSM2_PK PRIMARY KEY(CLASS_NUM, NAME, SNUM)
+);
+
+INSERT INTO CLASSROOM2 VALUES (NULL, '이이름', 10);
+
+SELECT * FROM CLASSROOM2;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'CLASSROOM2';
+
+ALTER TABLE CLASSROOM2 DROP CONSTRAINT CLSM2_PK;
+------------------------------------------------------------------------------------------------------
+CREATE TABLE USERS(
+	USER_NO NUMBER(10) CONSTRAINT USERS_PK PRIMARY KEY,
+	USER_ID VARCHAR2(30) CONSTRAINT USER_UID_NN NOT NULL,
+	USER_PW VARCHAR2(65) CONSTRAINT USER_UPW_NN NOT NULL,
+	USER_NM VARCHAR2(40) CONSTRAINT USER_UM_NN NOT NULL,
+	REG_DT DATE DEFAULT SYSDATE,
+	CONSTRAINT USER_UID_UQ UNIQUE(USER_ID)
+);
+
+CREATE SEQUENCE SEQ_USERS;
+
+DROP SEQUENCE SEQ_USERS;
+
+INSERT INTO USERS (USER_NO, USER_ID, USER_PW, USER_NM)
+	VALUES (SEQ_USERS.NEXTVAL, 'USER10', '1234', '사용자01');
+
+SELECT * FROM USERS;
+
+SELECT * FROM USER_SEQUENCES;
+
+DROP TABLE USERS;
+------------------------------------------------------------------------------------------------------
+SELECT * FROM DEPT;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'DEPT';
+SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME = 'DEPT';
+SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME = 'EMP';
+SELECT * FROM EMP;
+-- 안되는 조건
+INSERT INTO EMP(EMPNO, ENAME, JOB, DEPTNO)
+	VALUES(9999,'이이름','CLECK', 50);
+
+CREATE TABLE DEPT_FK(
+	DEPTNO NUMBER(2) CONSTRAINT DEPTKF_DEPTNO_PK PRIMARY KEY,
+	DNAME VARCHAR2(14),
+	LOC VARCHAR2(13)
+);
+
+SELECT * FROM DEPT_FK;
+
+CREATE TABLE EMP_FK(
+	EMPNO NUMBER(4) CONSTRAINT EMPFK_EMPNO_PK PRIMARY KEY,
+	ENAME VARCHAR2(10),
+	JOB VARCHAR2(9),
+	MGR NUMBER(4),
+	HIREDATE DATE,
+	SAL NUMBER(7,2),
+	COMM NUMBER(7,2),
+	DEPTNO NUMBER(2) CONSTRAINT EMPFK_DEPTNO_FK 
+					REFERENCES DEPT_FK (DEPTNO)
+);
+
+SELECT * FROM DEPT_FK;
+
+INSERT INTO DEPT_FK	VALUES (10,'부서명', '지역명');
+
+INSERT INTO EMP_FK (EMPNO, ENAME, JOB, DEPTNO)
+	VALUES (9998,'최이름', 'CLERK', 10);
+
+SELECT * FROM EMP_FK;
+
+DELETE FROM DEPT_FK WHERE DEPTNO = 10;
+
+SELECT * FROM DEPT_FK;
+SELECT * FROM EMP_FK;
+
+DELETE FROM DEPT_FK WHERE DEPTNO=10;
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'EMP_FK';
+
+ALTER TABLE EMP_FK DROP CONSTRAINT EMPFK_DEPTNO_FK;
+
+ALTER TABLE EMP_FK
+MODIFY DEPTNO CONSTRAINT EMPFK_DEPTNO_FK REFERENCES DEPT_FK(DEPTNO) ON DELETE CASCADE;
+------------------------------------------------------------------------------------------------------
+
+CREATE TABLE TABLE_CHECK (
+	LOGIN_ID VARCHAR2(20) CONSTRAINT TBCK_PK PRIMARY KEY,
+	LOGIN_PWD VARCHAR2(20) CONSTRAINT TBCK_LPWD_CK CHECK(LENGTH(LOGIN_PWD) > 3),
+	TEL VARCHAR2(20)
+);
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TABLE_CHECK';
+
+INSERT INTO TABLE_CHECK VALUES ('USER03', '1234', '010-0000-0000');
+
+SELECT * FROM TABLE_CHECK;
+
+ALTER TABLE TABLE_CHECK DISABLE CONSTRAINT TBCK_LPWD_CK;
+
+ALTER TABLE TABLE_CHECK ENABLE CONSTRAINT TBCK_LPWD_CK;
+
+DELETE FROM TABLE_CHECK WHERE LOGIN_ID = 'USER02';
+
+ALTER TABLE TABLE_CHECK ADD REGDT DATE DEFAULT SYSDATE;
+
+INSERT INTO TABLE_CHECK (LOGIN_ID, LOGIN_PWD, TEL) 
+	VALUES ('USER03', '1234', '010-0000-0000');
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

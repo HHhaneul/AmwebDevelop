@@ -1,0 +1,502 @@
+데이터 처리와 가공을 위한 오라클 함수
+- 내장함수 종류
+1) 단일행 함수
+	- 행 하나의 데이터 적용
+
+2) 다중행 함수
+	- 행 여러개의 결과 -> 적용
+	예) 합계, 평균
+		SAL의 합계
+		
+단일행 함수
+	문자, 숫자, 날짜
+
+문자함수
+
+1. UPPER, LOWER, INITCAP
+
+	UPPER: 소문자 -> 대문자
+	LOWER: 대문자 -> 소문자
+	INITCAP: 첫글자만 대문자, 나머지는 소문자
+
+
+2. LENGTH
+	- 문자 길이(문자의 실제 개수)
+
+
+	참고)
+		CHECK(LENGTH(LOGIN_PWD) > 3)
+
+		LENGTGB - 문자의 바이트 수
+			- 알파벳 1개 - 1바이트, UTF-8 기준 한글 1자 - 3바이트
+
+		MySQL - LENGTH - 문자의 바이트 수
+		         - LENGTH_CHAR - 문자의 실제 개수
+
+3. SUBSTR
+	- 문자열 일부를 추출할 때
+	- SUBSTR(시작 위치, 추출 길이): // 시작위치는 1부터 시작
+	    SUBSTR(JOB, 1, 2): JOB 컬럼에서 첫번째부터 2자 추출
+
+	- SUBSTR(컬럼명, 시작위치) // 시작위치에서 끝까지
+
+	시작위치 - 1부터 시작 좌 -> 우 : 양수
+		- 음수: 예) -1: 우측 끝 글자: 이동 방향 우 ->  좌
+
+4. INSTR
+	- 문자의 위치 (1부터 시작)
+	- 문자가 없으면 0을 반환
+	- 1이상을 반환 -> 문자가 존재: LIKE 포함 (LIKE '%키워드%') 조건을 대체
+
+	참고)
+		자바스트립트, 자바 -> String
+					indexOf: 	문자열의 위치(0부터 시작)
+						문자열이 없으면 -1을 반환
+
+5. REPLACE
+	문자 교체
+	
+	REPLACE(문자열, 찾는 문자, 교체할 문자)
+
+6. LPAD, RPAD
+
+	LPAD: 왼쪽으로 부족한 문자열 채우기
+	RPAD: 오른쪽으로 부족한 문자열 채우기
+
+	LPAD(문자열, 자리수, 자리수가 남는 경우 채워줄 문자)
+
+	10 -> 0010
+	100 -> 0100
+
+7. CONCAT
+	- 문자열 결합
+	직업명 : 직책
+		CONCAT ( CONCAT (ENAME, ' : '), JOB)
+
+		참고) MySQL: CONCAT(ENAME, ':', JOB)
+
+- || 연산자: 문자열 결합
+	문자열 || 문자열 || 문자열 -- 오라클만 가능한 문법
+
+8. TRIM, LTRIM, RTRIM
+	- 공백 제거
+
+	- TRIM: 양쪽 공백 제거
+		- 왼쪽, 오른쪽 여백을 지정해서 제거
+		- 특정 문자열 제거
+		TRIM(방향 '제거할 문자열' FROM 문자열)
+
+		방향 - LEADING: 왼쪽
+		      - TRAILING: 오른쪽
+		      - BOTH: 양쪽
+
+	- LTRIM: 왼쪽 공백 제거
+		- 특정 문자열 제거
+
+	- RTRIM: 오른쪽 공백 제거
+		- 특정 문자열 제거
+
+숫자합수
+1. ROUND: 반올림
+	ROUND(1234.5678,0)
+		1234 자리까지 출력 -> 소수점 첫째자리에서 반올림
+
+		양수: 소수점 자리
+		음수: 정수자리
+			1	2	3	4.	5	6	7
+			-3	-2	-1	0	1	2	3
+2. CEIL: 올림
+3. FLOOR: 버림
+4. TRUNC - 절사
+	TRUNC(숫사, 절사 위치 - 기본 값 소수점 첫째 자리 까지 제거 - 0)
+		절사 위치: 양수 - 소수점 자리
+		절사 위치: 음수 - 정수 자리
+
+5. MOD: 나머지 연산
+	MOD(숫자,나누는수)
+
+	참고)
+		자바, 자바스크립트 나머지 연산자 %
+
+
+
+날짜 함수
+1. 연산자 - 
+1) 날짜 데이터 + 숫자: 숫자만큼 날짜 더하기
+2) 날짜 데이터 - 숫주: 숫자만큼 날짜 빼기
+3) 날짜 데이터 - 날짜 데이터: 간격 일 수
+4) 날짜 데이터 + 날짜 데이터: 연산 불가
+
+2. ADD_MONTHS
+	- 몇 개월 더하기(양수) / 빼기(음수)
+	- ADD_MONTHS(날짜 데이터, 더하거나 뺄 개월 수)
+
+3. MONTHS_BETWEEN
+	- 월 단위 간격
+	- MONTHS_BETWEEN(비교 날짜1, 비교 날짜2)
+
+4. NEXT_DAY, LAST_DAY
+	
+	NEXT_DAY: 가장 가까운 요일
+		NEXT_DAY(날짜, "요일 문자")
+
+	LAST_DAY: 현재 달의 마지막 일
+		LAST_DAY(날짜)
+
+
+형 변환 함수
+1. TO_CHAR: 형식화된 문자
+	- 날짜
+	   Y - 연도 / YYYY - 4자리 연도 / YY - 2자리 연도
+	   R - 연도 / RRRR - 4자리 연도 / RR - 2자리 연도
+	   M - 월
+	   D - 일
+	   DAY - 요일 이름 전체
+	   DY - 요일 이름 약자
+	   MI - 분
+	   SS - 초
+
+		- 차이점: 2자리
+			YY - 현재년도 기준 80 -> 2080
+			RR - 가장 가까운 년도 기준 80 -> 1980
+			MM - 월
+			DD - 일
+
+			HH - 시(24) / hh - 시(12) / HH24 / HH12
+			MI - 분
+			SS - 초
+	- 숫자
+	   999.99 -> 소수점을 2자리까지 표기
+	   999,999 -> 3자리마다 ,를 추가
+
+	TO_CHAR(숫자,'패턴')
+
+2. TO_NUMBER
+	형식화된 숫자 문자열 -> 숫자
+
+	문자 + 숫자 - 문자숫자
+
+	- 암묵적인 형 변환: 문자라고 하더라도 숫자로 충분히 판단 가능 -> 자동 변경
+
+	TO_NUMBER(형식화 숫자 문자열, 패턴): -> 숫자
+
+3. TO_DATE
+	- 형식화된 문자 -> 날짜
+	- TO_DATE(형식화된 날짜 문자, 형식) -> 날짜
+
+NULL 처리 함수
+- 값이 없음
+- 연산 X (비교 방식으로 체크 불가 =, 산술 연산도 불가)
+- IS NULL: NULL인지 체므
+	참고) IS NOT NULL : NULL이 아닌지 체크
+
+1. NVL
+	NVL(컬럼명, 컬럼명이 NULL일 때 대체 값)
+
+
+2. NVL2
+	NVL2(컬럼명, 컬럼명이 NULL이 아닐 때 대체값, 컬럼명이 NULL일 때 값)
+
+선택문
+1. DECODE 함수
+	- 오라클에만 있는 함수
+
+2. CASE 함수
+	- 표준 SQL에 있는 구문
+
+	CASE 컬럼명
+		WHEN '키워드' THEN 출력할 컬럼 또는 연산
+
+		ELSE 키워드가 전부 매칭이 안될 경우 ...
+		END
+
+		CASE
+			WHEN 조건식1 THEN 조건이 참일 때 출력 값
+			WHEN 조건식2 THEN 조건식1 X, 조건식2 참 출력값
+			...
+		END 별칭
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------
+
+SELECT ENAME, LOWER(ENAME) "LOWER", INITCAP(ENAME) "INITCAP" FROM EMP;
+
+SELECT UPPER('abc') FROM DUAL;
+
+SELECT * FROM EMP;
+
+SELECT * FROM EMP WHERE ENAME = 'scott';
+
+SELECT * FROM EMP WHERE ENAME = 'scott'; -- 이건 안되지롱
+SELECT * FROM EMP WHERE ENAME = 'SCOTT';
+-- 대소문자 관계없이 조회하기 --
+SELECT * FROM EMP WHERE UPPER(ENAME) = UPPER('scott');
+SELECT * FROM EMP WHERE UPPER(ENAME) = UPPER('ScoTt');
+
+SELECT ENAME, LENGTH(ENAME) FROM EMP;
+
+SELECT ENAME, LENGTH(ENAME) FROM EMP WHERE LENGTH(ENAME) >= 5;
+
+SELECT LENGTH('AB 한글 !' )  FROM DUAL; -- 7개 공백도 문자로 포함
+
+SELECT LENGTHB('AB 한글 !' )  FROM DUAL; -- 11개 영어 - 1byte, 한글 - 3byte
+
+SELECT * FROM EMP;
+
+SELECT SUBSTR(JOB, 2, 3) FROM EMP;
+
+SELECT SUBSTR(JOB, -3, 3) FROM EMP WHERE  JOB = 'CLERK';
+
+SELECT SUBSTR(JOB, -LENGTH(JOB), 3) FROM EMP WHERE  JOB = 'CLERK';
+
+SELECT SUBSTR(JOB, 2) FROM EMP WHERE  JOB = 'CLERK';
+
+SELECT INSTR ('Apple, Orange, Melon, Mango', 'Orange') FROM DUAL;
+
+SELECT * FROM EMP WHERE ENAME LIKE '%S%';
+----------------------- 같은 출력 ----------------------- LIKE를 더 많이 사용
+SELECT * FROM EMP WHERE INSTR(ENAME, 'S') > 0;
+
+SELECT REPLACE('1 LITTLE, 2 LITTLE, 3 LITTLE, 4 LITTLE, 5 LITTLE', 'LITTLE', 'byte') FROM DUAL;
+
+SELECT LPAD('10', 6, '0') FROM DUAL;
+
+SELECT * FROM EMP;
+
+SELECT RPAD(SUBSTR(ENAME, 1, 3), LENGTH(ENAME) , '*') FROM EMP;  
+
+SELECT EMPNO, CONCAT(CONCAT(ENAME, ': '), JOB) "사원명: 직책" FROM EMP;
+
+SELECT EMPNO, ENAME || ': ' || JOB "사원명: 직책" FROM EMP; -- 오라클만 가능
+
+-- CONCAT(ENAME, ' : ', JOB) - MySQL
+
+SELECT '[' || TRIM('_' FROM'____ABC_____') || ']' FROM DUAL;
+
+SELECT '[' || TRIM(LEADING '_' FROM'____ABC_____') || ']' FROM DUAL;
+SELECT '[' || TRIM(TRAILING '_' FROM'____ABC_____') || ']' FROM DUAL;
+SELECT '[' || TRIM(BOTH '_' FROM'____ABC_____') || ']' FROM DUAL;
+
+
+SELECT '[' || RTRIM('           _ABC_           ') || ']' FROM DUAL;
+SELECT '[' || LTRIM('           _ABC_           ') || ']' FROM DUAL;
+
+SELECT ROUND(1234.5678) FROM DUAL;
+SELECT ROUND(1234.5678, 1) FROM DUAL;
+SELECT ROUND(1234.5678, 2) FROM DUAL;
+SELECT ROUND(1234.5678, -1) FROM DUAL;
+
+
+SELECT CEIL(1234.26) FROM DUAL;
+SELECT FLOOR(1234.56) FROM DUAL;
+
+SELECT CEIL(1234.26 * 10) / 10 FROM DUAL;
+SELECT CEIL(1234.5678 * 100) / 100 FROM DUAL;
+
+SELECT TRUNC(1234.5678) FROM DUAL; 
+SELECT TRUNC(1234.5678, 0) FROM DUAL; 
+SELECT TRUNC(1234.5678, 1) FROM DUAL; 
+SELECT TRUNC(1234.5678, -1) FROM DUAL; 
+SELECT TRUNC(1234.5678, -2) FROM DUAL; 
+
+SELECT MOD(10,3) FROM DUAL;
+
+SELECT SYSDATE + 7 "일주일 후" FROM DUAL;
+
+SELECT SYSDATE + 7 "일주일 후", SYSDATE - 7 "일주일 전" FROM DUAL;
+
+SELECT * FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, HIREDATE, CEIL(SYSDATE - HIREDATE) "근무 일수" FROM EMP;
+
+SELECT SYSDATE 현재, ADD_MONTHS(SYSDATE, 6) "6개월 후" FROM DUAL; 
+
+SELECT SYSDATE 현재, ADD_MONTHS(SYSDATE, 6) "6개월 후",
+	ADD_MONTHS(SYSDATE, -6) "6개월 전" FROM DUAL; 
+
+SELECT EMPNO, ENAME, HIREDATE,
+	ABS(CEIL(MONTHS_BETWEEN(SYSDATE, HIREDATE))) "근무 개월 수" FROM EMP;  
+
+SELECT SYSDATE 현재, NEXT_DAY(SYSDATE, '화요일') "다음 화요일",
+		LAST_DAY(SYSDATE) "마지막 일자" FROM DUAL;  
+
+SELECT SYSDATE 현재, NEXT_DAY(SYSDATE, '수요일') "다음 수요일" FROM DUAL; -- 가장 가까운 수요일
+
+SELECT * FROM EMP;
+
+SELECT TRIM(TO_CHAR(1234.5678, '$999,999.99')) FROM DUAL;
+
+SELECT '$' || TRIM(TO_CHAR(1234.5678, '999,999.99')) FROM DUAL;
+
+SELECT * FROM EMP;
+
+SELECT HIREDATE, TO_CHAR(HIREDATE, 'MM/DD/YYYY') 고용일 FROM EMP ORDER BY HIREDATE;
+
+SELECT TO_DATE('80/03/21', 'YY/MM/DD') YY,
+		TO_DATE('80/03/21', 'RR/MM/DD') RR FROM DUAL;
+
+SELECT * FROM EMP_LIKE;
+
+INSERT INTO EMP_LIKE (EMPNO, ENAME, JOB, HIREDATE)
+	VALUES (9997, 'NAME', 'CLERK', '2023/06/20');
+
+INSERT INTO EMP_LIKE (EMPNO, ENAME, JOB, HIREDATE)
+	VALUES (9996, 'NAME2', 'CLERK', TO_DATE('06/20/2023', 'MM/DD/YY'));
+--암묵적인 형 변환
+SELECT '500' + 100 FROM DUAL;
+-- 이건 안댐
+SELECT '1,000' + 100 FROM DUAL;
+-- 이렇게 바꿔주기!
+SELECT TO_NUMBER('1,000', '9,999') + 100 FROM DUAL;
+
+----------------------------------------------------------------------------------------
+
+TO_CHAR
+	- 숫자 -> 형식화된 숫자 문자
+		1000 -> 1,000
+		TO_CHAR(1000, '9,999')
+
+	- 날짜 -> 형식화된 날짜
+		TO_CHAR(날짜, '패턴');
+		
+		YYYY / RRRR
+			YY / RR -> YY : 현재 년도 기준, RR 가장 가까운 년도 기준
+			MM - 월
+			DD - 일
+			
+			HH24 / HH12
+			MI - 분
+			SS - 초
+
+TO_NUMBER
+	형식화된 숫자 -> 숫자
+
+TO_DATE
+	형식화된 날짜 -> 날짜
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+SELECT EMPNO, ENAME, SAL, COMM, SAL*12 + NVL(COMM, 0) 연봉 FROM EMP;
+
+SELECT EMPNO, ENAME, SAL, COMM, NVL2(COMM, SAL*12 + COMM, SAL * 12) 연봉 FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, SAL 현재급여,
+	DECODE(JOB,
+		'MANAGER', SAL * 1.1,
+		'SALESMAN', SAL * 1.05,
+		'ANALYST', SAL * 1.03) 인상급여 FROM EMP; 
+
+
+SELECT EMPNO, ENAME, JOB, SAL 현재급여,
+		CASE JOB
+			WHEN 'MANAGER' THEN SAL * 1.1
+			WHEN 'SALESMAN' THEN SAL * 1.05
+			WHEN 'ANALYST' THEN SAL * 1.03
+			ELSE SAL
+		END 인상급여
+	FROM EMP;
+
+
+SELECT * FROM EMP;
+
+SELECT EMPNO, ENAME, SAL,
+	CASE 
+		WHEN SAL >= 3000 THEN 'HIGH'
+		WHEN SAL >= 2000 THEN 'MID'
+		ELSE 'LOW'
+	END	급여레벨
+FROM EMP;
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

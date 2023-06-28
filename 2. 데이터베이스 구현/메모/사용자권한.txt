@@ -1,0 +1,401 @@
+06/19
+접속방법
+	sqlplus 계정/비밀번호
+
+	system: 최고 관리자 계정
+
+	exit 엔터: whdfy
+
+	사용자 변경
+		CONN 계정/비밀번호
+
+	cls: 내용삭제
+
+	계정명: 대소문자 구분X
+	계정비밀번호: 대소문자 구분O
+
+사용자, 권한, 롤 관리
+1. 사용자 관리
+- 사용자란?
+- 스키마란?
+
+2. 사용자 생성
+	CREATE USER 사용자명 IDENTIFIED BY 비밀번호;
+
+
+	참고)
+		GRANT
+
+		사전(Dictionary) 테이블
+			USER_...
+			ALL_...
+			DBA_....
+
+			DICTIONARY -> DICT: 별칭
+
+3. 사용자 정보 조회
+
+4. 오라클 사용자의 변경과 삭제
+	ALTER USER 사용자명
+		INDENTIFIED BY 비밀번호
+			...
+
+	DROP USER 사용자명 [CASCADE];
+
+	참고) CASCADE: 사용자 + 스키마 객체 함께 삭제
+
+권한 관리하기
+
+참고)
+스키마 객체
+	테이블 객체
+	테이블 객체
+	
+
+
+1. 시스템 권한
+- 시스템 권한 부여
+	GRANT 권한, 권한2 ... TO 사용자명,ROLE,PUBLIC   WITH ADMIN OPTION;
+
+	TO 사용자
+	TO ROLE
+	TO PUBLIC: 모든 사용자 (잘 사용하지 않음)
+
+	- WITH ADMIN OPTION; - 권한 부여 관리자(사용자가 소유한 권한 부여)
+
+- 시스템 권한 취소
+	REVOKE 권한 FROM 사용자명/ROLE/PUBLIC
+
+	CREATE SESSION
+	CREATE TABLE
+	CREATE SEQUENCE
+	CREATE VIEW
+	CREATE SYNONYM
+
+2. 객체 권한이란?
+	사용자별 권한 (테이블, 인덱스, 뷰, 시퀀스, ... )
+	
+
+
+- 객체 권한 부여
+	GRANT 객체 권한, ... ON 스키마.객체(테이블, 뷰, 시퀀스, ... ) TO 사용자명/ROLE/PUBLIC WITH GRANT OPTION; 
+
+	참고)
+		스키마명(사용자명).테이블
+
+		WITH GRANT OPTION - 객체 권한을 다른 사용자에게 부여할 수 있는 권한
+	
+	참고) mysql 
+		권한 부여 후
+		FLUSH PRIVILEGES;
+
+- 객체 권한 취소
+	REVOKE 객체권한, ... ON 스키마명(사용자명).객체명(테이블,뷰 ...) FROM 사용자명/ROLE/PUBLIC; // WITH GRANT OPTION; 
+
+롤관리
+
+1. 사전 정의된 롤
+
+- CONNECT 롤
+	CREATE CLUSTER
+	CREATE DATABASE LINK
+	CREATE SEQUENCE
+	CREATE SESSION
+	CREATE SYNONYM
+	CREATE TABLE
+	CREATE VIEW
+
+- RESOURCE 롤
+	CREATE TRIGGER
+	CREATE SEQUENCE
+	CREATE TYPE
+	CREATE PROCEDURE
+	CREATE CLUSTER
+	CREATE OPERATOR
+	CREATE INDEXTYPE
+	CREATE TABLE
+
+2. 사용자 정의 롤
+	CREATE ROLE ROLE 이름;
+	GRANT 권한 TO ROLE 이름;
+	GRANT ROLE 이름 TO 사용자;
+	
+- 롤 생성과 권한 포함
+- 부여된 롤과 권한 확인
+CREATE ROLE
+
+- 부여된 롤 취소
+REVOKE ROLE 명칭 FROM 사용자
+
+- 롤 삭제
+
+DROP ROLE ROLE 명칭;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GRANT SELECT ON ORCLSTUDY.TEMP1 TO SCOTT WITH GRANT OPTION;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------
+
+CREATE: 생성
+	예) CREATE USER
+	     CREATE TABLE ..
+
+ALTER: 수정
+
+DROP: 삭제
+
+
+☆★☆★☆★☆★☆★☆★시험문제☆★☆★☆★☆★☆★☆★
+설치
+SCOTT -> LOCK
+
+ALTER USER SCOTT IDENTIFIED BY tiger ACCOUNT UNLOCK;
+*/
+
+--------------------------------------------------------------------------------
+Microsoft Windows [Version 10.0.19041.264]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Administrator>sqlplus system/_aA123456
+
+SQL*Plus: Release 11.2.0.1.0 Production on 수 6월 14 09:33:46 2023
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+
+다음에 접속됨:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> CREATE USER ORCLSTUDY IDENTIFIED BY ORACLE;
+
+사용자가 생성되었습니다.
+
+SQL> CONN ORCLSTUDY/ORACLE
+ERROR:
+ORA-01045: user ORCLSTUDY lacks CREATE SESSION privilege; logon denied
+
+
+경고: 이제는 ORACLE에 연결되어 있지 않습니다.
+SQL> GRANT CREATE SECSSION TO ORCLSTUDY;
+SP2-0640: 연결되지 않았습니다.
+SQL> CONN SYSTEM/_aA123456
+연결되었습니다.
+SQL> GRANT CREATE SESSION TO ORCLSTUDY;
+
+권한이 부여되었습니다.
+
+SQL> CONN ORCLSTUDY/ORACLE
+연결되었습니다.
+SQL>
+SQL>
+SQL> ALTER USER ORCLSTUDY IDENTIFIED BY ORCL;
+
+사용자가 변경되었습니다.
+
+SQL> CONN ORCLSTUDY/ORCL;
+연결되었습니다.
+SQL> ALTER USER ORCLSTUDY IDENTIFIED BY ORCL;
+
+사용자가 변경되었습니다.
+
+SQL> CONN SYSTEM/_aA123456
+연결되었습니다.
+SQL> DROP USER ORCLSTUDY CASCADE;
+
+사용자가 삭제되었습니다.
+
+SQL> CONN ORCLSTUDY/ORCL
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+경고: 이제는 ORACLE에 연결되어 있지 않습니다.
+SQL> CONN ORCLSTUDY/ORCL;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+SQL>
+
+
+
+ GRANT RESOURCE, CONNECT TO ORCLSTUDY;
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆암기★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★
+
+CREATE: 생성
+	예) CREATE USER: 사용자 생성
+
+ALTER: 변경
+	예) ALTER USER: 사용자 변경
+
+DROP: 삭제
+	예) DROP USER: 사용자 삭제
+	     DROP ROLE: ROLE삭제
+
+GRANT
+	- 시스템 권한
+		GRANT 시스템 권한, .... TO 사용자명;
+			+ WITH ADMIN OPTION: 권한 부여 관리자
+		
+	- 객체 권한
+		GRANT 객체 권한 ON 스키마명(사용자명).객체명 TO 사용자;
+			+ WITH GRANT OPTION: 권한 부여 관리자
+
+REVOKE
+	- 시스템 권한
+		REVOKE 시스템 권한 FROM 사용자;
+		
+	- 객체 권한
+		REVOKE 객체 권한 ON 스키마명(사용자명).객체명 FROM 사용자;
+
+GRANT RESOURCE, CONNECT TO ORCLSTUDY; //룰/
+
+--------------------------------------------------------------------------
+
+SQL - Structured Query Language
+
+Query 질의
+
+SQL 이론적: 에드가 커드: 관계 대수 + 집합 
+
+데이터 관리 -> 데이터를 담을 공간(틀 - 테이블, 스키마)
+
+SQL
+	- DDL(Data Definition Language - 데이터 정의어)
+		- 스키마의 구조를 정의하는 언어(테이블, 인덱스, 시퀀스, 뷰, ... )
+
+	- DML(Date Manipulation Language - 데이터 조작어)
+		- 데이터를 추가, 수정, 삭제, 조회
+			- INSERT 문
+			- UPDATE 문
+			- DELETE 문
+			- SELECT 문 
+		
+
+------------------------------------------------------------------------------------------------
+
+
+SQL> alter user sys identified by _aA123456;
+alter user sys identified by _aA123456
+                             *
+1행에 오류:
+ORA-00911: 문자가 부적합합니다
+
+
+SQL> alter user sys identified by aA123456;
+
+사용자가 변경되었습니다.
+
+SQL> conn system/aA123456
+연결되었습니다.
+SQL> ALTER USER ORCLSTUDY IDENTIFIED BY ORACLE PASSWORD EXPIRE;
+
+사용자가 변경되었습니다.
+
+SQL> CONN orclstudy/ORACLE
+ERROR:
+ORA-28001: the password has expired
+
+
+orclstudy에 대한 비밀번호를 변경합니다.
+새 비밀번호:
+새 비밀번호 다시 입력:
+비밀번호가 변경되었습니다.
+연결되었습니다.
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

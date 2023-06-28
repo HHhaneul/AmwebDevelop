@@ -1,0 +1,178 @@
+SELECT문의 기본 형식
+- 조회 + WHERE
+
+1. 실습용 테이블 살펴보기
+
+2. 데이터를 조회하는 3가지 방법
+- 셀렉션
+- 프로젝션
+- 조인
+
+3. SELECT 문 문법
+SELECT [ALL|DISTINCT]컬럼명, ... FROM 테이블명;
+	* - 모든 컬럼명
+
+ALL - 기본값: 중복을 포함한 모든 레코드
+DISTINCT: 중복을 제외한 레코드
+
+4. 중복 데이터를 삭제하는 DISTINCT
+- 컬럼 기준의 중복 제거
+- 컬럼이 여러개 있을 경우 -> 조합한 경우가 중복되면 제거
+
+
+
+5. 별칭 설정하기
+	- 컬럼간 연산 가능
+	- AS(Alias)
+	- 컬럼, 테이블 가능(ORACLE X, MYSQL O)
+	- 컬럼명 [AS] "별칭"
+	- AS 생략 가능
+	- " " 생략가능: 별칭안에 공백이 없는 경우만 / 공백이 있는 경우 반드시 " "
+
+	- 테이블도 별칭이 가능, 오라클에서는 AS
+
+6. 원하는 순서로 출력 데이터를 정렬하는 ORDER BY
+- 오름차순(ASC), 내림차순(DESC)
+
+SELECT .... FROM 테이블명 .... ORDER BY 컬럼명 [ASC - 기본값|DESC] 
+ASC - 기본값: 생략가능
+
+ORDER BY 컬럼명1 [ASC|DESC], 컬럼명2[ASC|DESC];
+
+1차 정렬 - 컬럼명1
+2차 정렬 - 컬럼명1 값이 동일하면 컬럼명2
+
+
+참고)
+CREATE INDEX 인덱스명 ON 테이블명 (컬럼명 [ASC|DESC]);
+
+CREATE INDEX idx_hiredate ON EMP (HIREDATE DESC);
+
+
+
+
+
+
+
+SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;
+
+SELECT DEPTNO FROM EMP;
+
+SELECT DISTINCT DEPTNO FROM EMP;
+
+-- 조합하면서도 가능
+SELECT DISTINCT JOB, DEPTNO FROM EMP ;
+
+SELECT * FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, SAL * 12 FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, SAL * 12 AS "연봉" FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, SAL * 12 연봉 FROM EMP;
+-- 공백으로 AS를 대체하기에 공백이 있으면 오류남.
+SELECT EMPNO, ENAME, JOB, SAL * 12 ANNUAL SALARY FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, SAL * 12 "ANNUAL SALARY" FROM EMP;
+
+SELECT E.EMPNO, E.JOB FROM EMP E WHERE E.JOB = 'CLERK';
+
+SELECT * FROM EMP;
+
+SELECT * FROM EMP ORDER BY HIREDATE;
+
+SELECT * FROM EMP ORDER BY HIREDATE DESC;
+
+CREATE INDEX idx_hiredate ON EMP (HIREDATE DESC);
+
+SELECT * FROM EMP ORDER BY JOB;
+-- JAB 정렬 후 JAV이 동일한 경우 SAL 내림차순으로 조회
+SELECT * FROM EMP ORDER BY JOB, SAL DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

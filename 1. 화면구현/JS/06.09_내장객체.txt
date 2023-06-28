@@ -1,0 +1,205 @@
+내장 객체
+1. 내장 생성자
+	Object
+		- 모든 객체의 상위 객체 Object.prototype
+		- {} / new Object;
+
+		- Object.keys(): 속성명 배열 객체 반환
+		- Object.value(): 속석값을 배열 객체로 반환
+
+	String: 문자열 생성자 객체
+		- 래퍼(Wrapper) 생성자 객체
+
+		- indexOf("단어"): "단어가 발견된 위치"(0부터 시작)
+				- 발견X -> -1
+				- 왼쪽 -> 오른쪽
+
+		- lastindexOf("단어"): 오른쪽 -> 왼쪽
+
+		- toLowerCase(): 대문자 -> 소문자
+		- toUpperCase(): 소문자 -> 대문자
+
+		- trim() 좌우 공백 제거
+		- trimEnd() 우측 공백 제거
+		- trimStart() 좌우 공백 제거
+
+	Number:
+		- 숫자 생성자 객체
+		- 래퍼(Wrapper) 생성자 객체
+		- NaN (Not a Number): 숫자가 아니다.
+		- new 생성 X, Number(숫자, 문자); -> 문자로된 숫자 -> 숫자
+		- isNaN(): 숫자가 아닌지 체크 true
+			- Number 함수에서 호출 시 NaN값이 나오는지 안나오는지 체크
+				(Number 함수를 호출: 문자열 숫자 -> 숫자)
+		- parseFloat(...): 문자열 숫자 -> 실수
+		- parseInt(...): 문자열 정수 -> 정수
+		- 
+	Boolean: false 또는 true로 인식하는 값 -> true, false
+		Boolean("값");
+
+	Array: 배열 생성자 객체
+		new Array(숫자)
+			숫자 - 1개이면: 배열 객체 공간의 갯수		
+			(문자 숫자 객체) - 2개이상: 배열 객체 생성 -> 각 값이 순서대로 들어간다.
+			
+		조회: 변수[순서번호];
+
+		추가
+			push(...data): 끝에 추가
+			unshift(...data): 앞에 추가
+		
+		제거
+			pop(): 끝에서 하나 제거
+			shift(): 앞에서 하나 제거
+
+		중간에서 추가, 제거
+			splice() // 객체명.splice(시작지점, 삭제할 갯수, "대입1", "대입2")
+
+		자바스크립트에서 배열 객체란?
+			1) 속성명 숫자
+			2) length
+			3) Array.prototype이 체인 (상속)☆★☆★☆
+
+	
+			변수 instanceof 생성자 함수 객체명
+			-> 참: 생성자 함수 객체로부터 생성된 객체
+
+			ES6+
+				이터레이터: 반복자
+				[Symbol].iterator..
+					.nextt()
+
+				이터레이터가 정의된 경우
+
+				for ... of 이터레이터 객체 구분 사용 가능
+				
+			자주 사용되는 메서드
+			for Each: 반복
+			map: 원 데이터를 가공 변경 -> 새로운 값 반환
+			filter: 반환값이 true인 값만 추출
+			find: 첫번째 요소
+			every: 모든 요소가 조건에 합당하면 true			
+			some: 어느 하나라도 조건에 합당하면 true
+
+			includes: 요소 포함 요부
+			indexOf: 요소의 위치 (0부터 시작하는 위치, 없으면 -1)
+				(왼쪽 -> 오른쪽)
+			lastindexOf: (오른쪽에서 -> 왼쪽)
+
+			join("구분 값"): 구분값으로 배열 객체를 결함 -> 문자열
+				(String.prototype.split(...) - 문자열 -> 배열 객체)
+
+			keys(): 배열의 인덱스 번호 목록
+			values(): 배열 객체의 값의 목록
+
+		Array.isArray(...): 배열인지 체크 - true
+				(변수 instanceof Array)
+
+
+			참고)
+				is ...: ~인지 아닌지
+
+			
+			reverse(): 순서를 역순
+
+			reduce(): 합성 곱
+
+			sort(): 정렬 (오름차순(a-b), 내림차순(b-a))
+
+
+			
+			참고) 화살표 함수
+
+				function 함수명(...){
+
+				}
+	
+				1) function 키워드, 함수명 -> 생략
+					매개변수와 구현코드({...)} 사이 =>
+				2) 구현 내용이 1줄일때는 {...} 생략 가능
+					-> return 예약어도 생략
+
+				3) 변수명도 한글자로 하는 것이 권장
+
+				4) 매개변수가 1개 일때는 (..) 생략 가능
+				5) 매개변수가 없는 경우는 () 생략 불가
+
+		Date: 날짜, 시간
+			new Date(): 객체 생성 시점의 날짜와 시간	
+				- getFullYear(): 연도 / setFullYear(...)
+				- getMonth(): 월(0 ~ 11, 0 - 1월, 11 - 12월) / setMonth(...)
+				- getDate(): 일 / setDate(...)
+
+				- getDay(): 요일 (0~6, 0 - 일요일, 6 - 토요일) / setDay(...)
+				
+				- getHours(): 시 / setHours(...)
+				- getMinutes(): 분 / setMinutes(...)
+				- getSeconds(): 초 / setSeconds(...)
+
+			Date.now(): - EpochTime / 1970.1.1.자정 -> 1/1000 카운팅
+
+			Date.parse("문자열 날짜, 시간")
+				- 문자열 날짜, 시간 -> 자바스크립트 Date 객체 변환
+					- ISO 형식 예) 2023-06-12T11:45:30 // 반환값 EpochTime
+
+			Date 생성자(EpochTime, 문자열 날짜 시간)
+
+			Error 생성자
+
+			try{
+				// 오류가 발생할 수 있는 코드
+				
+			} catch(err 객체){
+				// 오류에 대한 적절한 처리 코드
+			}
+
+
+			오류 발생
+			throw 에러 객체; 
+
+			- message 속성
+
+2. 내장 객체
+	JSON -
+		참고)
+			JSON(JavaScript Object Notation - 자바스크립트 객체 표기법으로 작성된 문자열)
+				
+				.stringify(자바스크립트 객체): 자바스크립트 객체 -> JSON 문자열
+				.parse(문자열): JSON 문자열 -> 자바스크립트 객체
+
+	Math
+		- 수학 관련 편의 기능
+			- abs(...): 절대값: 음수 -> 양수
+			- sign(..): 부호 (음수 -1, 양수 1, 0 - 0)
+			- round(...): 반올림
+			- floor(...): 버림
+			- ceil(...): 올림
+			- pow(a,b): a의 b승
+			- sqrt(...): sqrt(9): -> 3 // 루트
+
+3. 전역 객체
+	- window 객체
+
+4. 호스트 객체
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

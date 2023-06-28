@@ -1,0 +1,147 @@
+웹브라우저 객체
+클라이언트 측 자바스크립트
+1. 웹 브라우저에서 자바스크립트가 하는 일
+2. 웹 브라우저에서 자바스크립트 실행 순서
+	- script 태그
+	<script>
+		자바스크립트 소스
+	</script>
+
+	<script src = "스크립트 파일(js) 경로"></script>
+
+	서버 응답(html 텍스트) -> 브라우저 번역 -> Document 객체 변환, Binary Tree 구조 (DOMTree) -> DOMContentLoaded 이벤트 발생 -> Load 이벤트 발생(외부 자원 - css, js, 이미지, 비디오 ... 들 로드 완료 시)
+	
+	DOM - Document Object Model
+	선택 -> 검색
+
+3. async와 defer 속성
+	ES6+
+	
+	1) defer: DOMContentLoaded 이벤트 발생 이후에 스크립트 코드 실행
+	2) async: 비동기
+
+4.
+
+5.
+
+
+Window 객체
+1. Window 객체의 주요 프로퍼티
+	console
+		.log(...): 값 출력
+		.dir(...): 객체의 속성과 속성값
+		.error(...): 색상을 빨간색
+		.trace():
+		.time()
+		.timeEnd()
+
+
+	inner 너비, 높이: 스크롤바를 제외한 창의 너비, 높이
+		- innerWidth
+		- innerHeight
+		
+	outer 너비, 높이: 스크롤바를 포함한 창의 너비, 높이
+		- outerWidth
+		- outerHeight
+
+	스크롤한 위치
+		- pageXOffset: 좌 -> 우 스크롤한 위치
+		- pageYOffset: 위 -> 아래 스크롤한 위치
+
+	setTimeout(function(){
+		// 실행 될 코드
+
+	}, 지연시간); : 지연시간 / 1초 1000
+
+	setInterval(funtion(){
+		// 지연 시간 주기로 반복 실행될 코드
+
+	}, 지연시간);
+
+
+	이벤트: 비동기 실행
+		Non-blocking 방식
+
+	clearTimeout(등록번호): 지연실행 취소
+	clearInterval(등록번호): 지연반복실행 취소
+
+2. Window 객체의 주요 메서드
+- 브라우저의 기능과 관련 있는 객체
+
+Location 객체
+	window.location
+		.hash
+			#키워드 - HTML 요소
+	assign("주소"): 주소 이동: 이동 시 방문 기록 저장(history)
+		- href: 속성 변경으로 페이지 이동
+	replace("주소"): 주소 이동: 이동 시 방문 기록 저장X
+	reload(): 새로고침
+
+History 객체	
+	window.history
+		.length: 방문기록 개수
+		.scrollRestoration: auto - 이전 페이지의 스크롤 위치 복구
+				menual - 복구 X
+	
+		.back(): 뒤로 한단계 이동
+		.forward(): 앞으로 한단계 이동
+		.go(수치): 양수: 수치 만큼 앞으로 이동
+			 음수: 수치 만큼 뒤로 이동
+
+	SHIFT + CRTL + N: 시크릿 모드
+
+Navigator 객체 - 브라우저 환경에 대한 정보
+	window.navigator
+
+Screen 객체 - 브라우저 화면에 대한 정보
+	window.screen
+		orientation
+			landscape: 가로로 긴 화면
+			portrait: 세로로 긴 화면
+
+창 제어하기
+1. 창 여닫기
+- open(URL, "창 이름", "설정 옵션")
+	- 설정 옵션
+		width
+		heigh
+		scrollbars
+		..
+-close(URL, "창 이름", "설정 옵션")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Document 객체
+	window.document
+1. Document 객체의 주요 프로퍼티
+
+2. Document 객체 주요 메서드
+
+문서 제어
+1. DOM 트리
+2. HTML 요소의 트리
+- children
+- parentElement
+- firstElementChild
+- lastElementChild
+- nextElementSibling
+- previousElementSibling
+
+
+
+
+
+
+
+

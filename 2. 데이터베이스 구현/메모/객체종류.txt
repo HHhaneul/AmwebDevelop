@@ -1,0 +1,328 @@
+객체 종류 3교시 20분
+
+데이터 사전
+- 데이터베이스를 구상하고 운영하는데 필요한 모든 정보를 저장하는 ㅌ,ㄱ수한 테이블로 데이터베이스가 생성되는 시점에 자동으로 만들어집니다.
+
+- DICTIONARY / 동의어 DICT
+
+1. USER_ 접두어를 가진 데이터 사전
+
+- 현재 오라클에 접속해 있는 사용자가 소유한 객체 정보가 보관되어 있습니다.
+
+USER_TABLES: 현재 사용자가 소유한 테이블
+
+2. ALL_ 접두어를 가진 데이터 사전
+- 오라클 데이터베이스에 접속해 있는 사용자가 소유한 객체 및 다른 사용자가 소유한 객체 중 사용이 허락되어 있는 객체 정보를 가지고 있습니다.
+
+ALL_TABLES: 다른 사용자가 소유한 테이블까지 포함
+
+3. DBA_접두어를 가진 데이터 사전
+- 데이터베이스 관리 권한을 가진 사용자만 조회할 수 있는 테이블로서 SCOTT 계정으로는 조회가 불가능합니다.
+
+DBA_USERS
+
+더 빠른 검색을 위한 인덱스
+1. 인덱스란?
+	INDEX - 목차
+	1장 - .... - p.10
+	2장 - .... - p.110
+
+	- 레코드의 컬럼 데이터의 물리적 위치 기록
+		- 정렬 방향성 
+
+- Table Full Scan
+	- 테이블 레코드 전체 검색: 인덱스가 X
+
+- Index Scan
+	- 인덱스를 통한 검색
+
+참고)
+	클러스터 인덱스
+		- 검색의 기준 인덱스
+		- 기본키, 기본키가 없는 경우 UNIQUE 키, 
+
+	보조 인덱스
+		- 클러스터 인덱스 외의 인덱스
+		- 보조 인덱스 -> 검색된 레코드 -> 클러스터 인덱스
+
+- USER_INDEXES: 사용자가 추가한 인덱스 정보
+- USER_IND_COLUMNS: 추가한 인덱스의 컬럼 정보
+
+2. 인덱스 생성
+	CREATE INDEX 인덱스명 
+		ON 테이블명 (컬럼명1 [ASC]|DESC, 컬럼명2 [ASC]|DESC, ... );
+
+
+	참고)
+		상품 목록을 최신 순(regDt), 상품 분류(category)별 조회
+		- CREATE INDEX idx_테이블명_...
+			ON 테이블명 (REGDT DESC, CATAGORY);
+
+참고)
+	ASC: 오름차순 정렬(기본값 - 생략 가능)
+	DESC: 내림차순 정렬
+
+3. 인덱스 삭제
+	DROP INDEX 인덱스명
+
+테이블처럼 사용하는 뷰
+1. 뷰란?
+	가상의 테이블
+		- SELECT 결과물 -> 가상의 테이블
+
+2. 뷰의 사용 목적
+- 편리성: 복잡한 SELECT 구문의 결과를 가상의 테이블로 만들면 복잡성이 사라진다.
+- 보안성: 민감한 데이터!
+
+3. 뷰생성
+- 생성 / 수정
+	CREATE VIEW 뷰이름 AS (SELECT 문...) // 생성
+	CREATE OR REPLACE VIEW .... // 뷰가 정의 X -> 생성, 뷰가 정의 O -> 수정
+
+	- 적절한 권한 부여
+	- 시스템 권한: CREATE VIEW
+	- 뷰의 정보
+		USER_VIEWS / ALL_VIEWS
+	
+- 조회
+	- 테이블 조회와 동일하게 사용
+	- SELECT
+	
+- 삭제
+	DROP VIEW 뷰이름;
+
+4. 인라인 뷰를 사용한 TOP-N SQL문
+- 인라인 뷰 -- SELECT * FROM (SELECT * FROM EMP WHERE DEPTNO=20);
+	SELECT ... FROM (SELECT .... )
+
+- ROWNUM
+
+
+참고)      
+	별칭(Alias) - AS
+		AS "컬럼명"
+		- AS는 생략가능
+		- "" 생략가능 / 띄어쓰기 / 특수기호 사용시에는 생략 불가
+
+		- 테이블에도 적용 가능
+			AS는 사용 불가, 항상 생략
+
+			참고)
+			MySQL
+			테이블명 AS 별칭
+		
+			ORACLE
+			테이블명 별칭
+
+
+	WITH 구문
+	WITH 
+
+
+규칙에 따라 순번을 생성하는 시퀸스
+1. 시퀀스란?
+- 특정 규칙에 맞는 연속 숫자를 생성하는 객체
+
+2. 시퀀스 생성
+CREATE SEQUENCE 시퀀스명;
+
+USER_SEQUENCES: 사전 테이블: 생성된 시퀀스 정보
+
+참고)
+	CREATE SEQUENCE 권한이 부여
+
+	GRANT CREATE SEQUENCE TO 사용자;
+
+3. 시퀀스 사용
+	시퀀스 객체명
+		.CURRVAL
+			- 현재 시퀀스 번호
+		.NEXTVAL
+			- 증가 -> 다음 시퀀스 번호 반환
+			- 시퀀스 번호 증가
+
+참고)
+	DUAL: 값만 확인 시
+	SELECT 시퀀스 객체.CURRVAL FROM DUAL;
+
+4. 시퀀스 수정
+	ALTER SEQUENCE 시퀀스명 
+		INCREMENT BY NUM;
+		START WITH NUM; // 시작번호는 변경 불가
+		MAXVALUE NUM | NOMAXVALUE;
+		MINVALUE NUM | NOMINVALUE;
+		CYCLE | NOCYCLE;
+		CACHE NUM | NOCACHE;
+
+5. 시퀀스 삭제
+	DROP SEQUENCE 시퀀스명
+
+
+참고)
+	오라클 - 시퀀스 객체
+	MySQL - 제약조건 - AUTO_INCREMENT + 기본키
+
+공식 별칭을 지정하는 동의어
+1. 동의어
+- 테이블 - 뷰 - 시퀀스 등 객체 이름 대신 사용할 수 있는 다른 이름
+
+예) DICTIONARY -> DICT
+- 테이블 명이 길거나, 자주 사용되는 테이블
+
+
+
+권한
+	CREATE SYNONYM
+	CREATE PUBLIC SYNONYM
+
+2. 동의어 생성
+	CREATE [PUBLIC] SYSNONYM 동의명 
+		FOR 스키마명(사용자명).객체명(테이블, 뷰 ... );
+
+3. 동의어 삭제
+	DROP SYNONYM 동의명
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------
+
+		☆★시험문제★☆ 
+SELECT * FROM USER_INDEXES [WHERE TABLE_NAME='EMP_IDX'];
+				[    ] -> 감점 사유 필수!
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+CREATE TABLE EMP_IDX AS SELECT * FROM EMP; qweqwe
+
+SELECT * FROM EMP_IDX;
+
+CREATE INDEX IDX_EMPIDX_SAL ON EMP_IDX(SAL);
+
+SELECT * FROM USER_INDEXES WHERE TABLE_NAME='EMP_IDX';
+
+SELECT * FROM USER_IND_COLUMNS WHERE TABLE_NAME = 'EMP_IDX';
+
+SELECT * FROM USER_IND_COLUMNS WHERE TABLE_NAME = 'EMP_IDX';
+
+SELECT * FROM USER_IND_COLUMNS WHERE TABLE_NAME = 'EMP_IDX';
+
+SELECT * FROM USER_IND_COLUMNS WHERE TABLE_NAME = 'EMP_IDX';
+
+DROP INDEX IDX_EMPIDX_SAL;
+
+
+-----------------------------------------------------------------------------------------
+
+SELECT * FROM EMP;
+
+CREATE OR REPLACE VIEW VW_EMP20
+	AS (SELECT ENAME, JOB FROM EMP WHERE DEPTNO = 20);
+
+SELECT * FROM VW_EMP20 WHERE JOB='CLERK';
+--SELECT * FROM VW_EMP20 WHERE SAL > 800;
+
+SELECT * FROM USER_VIEWS;
+
+DROP VIEW VW_EMP20;
+
+-----------------------------------------------------------------------------------------------
+
+별칭
+
+SELECT EMPNO 사원번호, ENAME 사원명, JOB 직책명 FROM EMP;
+
+SELECT E.EMPNO, E.ENAME FROM (SELECT * FROM EMP WHERE DEPTNO=20) E;
+
+SELECT E.EMPNO, E.ENAME FROM (SELECT * FROM EMP WHERE DEPTNO=20) E WHERE E.JOB='CLERK';
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+ WITH E2 AS(SELECT ROWNUM NUM, E. * FROM EMP E)
+ SELECT * FROM E2 WHERE E2.NUM >= 3 AND E2. NUM < 7;
+ 
+-- 위 아래 같은 결과 값 페이지 만들 때에는 꼭 가상을 만들어준 후 해야함.
+
+
+SELECT * FROM (SELECT ROWNUM NUM, E. * FROM EMP E) E2
+ WHERE E2.NUM >= 3 AND E2. NUM < 7;
+ 
+CREATE SEQUENCE TEST1;
+
+DROP SEQUENCE TEST1;
+
+SELECT * FROM TEST1;
+
+--------------------------------------------------------------------------------------------------------
+
+CREATE TABLE 테이블명 AS SELECT * FROM DEPT [WHERE];
+
+CREATE TABLE DEPT_SEQUENCE AS SELECT * FROM DEPT WHERE 1 <> 1;
+-- DEPT의 구조만 복사
+SELECT * FROM DEPT_SEQUENCE;
+-- 시퀀스 생성
+CREATE SEQUENCE SEQ_DEPT_SEQUENCE
+	INCREMENT BY 10
+	START WITH 10
+	MAXVALUE 90
+	MINVALUE 0
+	NOCYCLE
+	CACHE 2;
+-- 시퀀스 조회
+SELECT * FROM USER_SEQUENCES;
+--생성
+INSERT INTO DEPT_SEQUENCE VALUES (SEQ_DEPT_SEQUENCE.NEXTVAL, 'DATABASE', 'SEOUL');
+
+--수정
+ALTER SEQUENCE SEQ_DEPT_SEQUENCE
+	INCREMENT BY 3
+	MAXVALUE 99
+	MINVALUE 0
+	CYCLE;
+-- 시퀀스 삭제
+DROP SEQUENCE SEQ_DEPT_SEQUENCE;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
