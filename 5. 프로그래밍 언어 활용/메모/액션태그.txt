@@ -1,0 +1,115 @@
+액션태그
+- 액션 태그는 서버나 클라이언트에게 어떤 행동을 하도록 명령하는 태그
+- 스크립트 태그, 주석, 디렉티브 태그와 함께 JSP 페이지를 구성하는 태그
+- 커스텀 태그의 일종
+
+액션태그의 종류
+1. forward 액션 태그의 기능과 사용법
+<jsp:forward page="이동할 페이지 - JSP, html, text, servlet 경로" />
+- 페이지 이동 / 버퍼의 통제
+- 기존 출력 버퍼를 취소, page에 정의된 경로의 출력 결과물을 버퍼에 출력하고 비운다.
+
+참고)
+    response.sendRedirect(...)
+        - 응답 헤더: Locatiom: 주소ㅓ
+
+2. include 액션 태그의 기능과 사용법
+- 페이지 추가 / 버퍼의 통제
+<jsp:include page="추가될 페이지 - JSP, html, text, servlet 경로" />
+
+3. include 액션 태그와 include 디렉티브 태그의 차이
+<%@ include 디렉티브 태그>: 출력 결과물 물리적으로 번역된 서블릿에 추가
+
+
+<jsp:include 액션 태그>: 출력 결과물이 출력 버퍼에 추가
+                        - 요청 처리 과정 중에 출력 버퍼 추가
+
+
+참고)
+    RequestDispatcher 인터페이스
+        forward(HttpServletRequest, HttpServletResponse)
+            - <jsp:forward ...> 동일
+        include(HttpServletRequest, HttpServletResponse)
+            - <jsp:include ...> 동일
+
+    HttpServletRequest
+        - RequestDispatcher getRequestDispatcher();
+
+
+    MVC 모델
+
+    M(Model)
+        - 기능 / 비지니스 로직
+        - Service: 기능
+            DTO(Data Transfer Object): 데이터 전달용 객체(getter / setter)
+                - VO(Value Object)
+
+            DAO(Data Access Object): 데이터에 접근하는 객체
+                - 추가, 수정, 삭제, 조회
+
+            + Validator ...
+            + 기타
+
+    V(View): 출력
+        예) /member/join.jsp
+
+    C(Controller)
+        - 요청 응답의 중재자
+        - 요청이 유입 -> 적절한 처리를 위한 Model 조회 -> 위임 -> 응답
+
+
+4. param 액션 태그의 기능과 사용법
+    - param 액션 태그는 현재 JSP 페이지에서 다른 페이지에 정보를 전달하는 태그
+    - 요청 데이터를 전달 하는 태그
+
+
+    참고)
+        POST
+            content-type: application/x-www-form-urlencoded;
+
+            키=값&키=값
+                값이 한글이면 16진수로 변경%
+
+            java.net.URLEncoder
+            java.net.URLDecoder
+
+5. 자바빈즈 액션 태그의 기능과 사용법
+1) 자바빈즈 :  데이터 표현을 목적으로 하는 자바 클래스
+    <jsp:useBean>
+        -> 객체를 생성 / 데이터 전달용 객체(DTO)
+
+    <jsp:useBean id="식별 이름" class="패키지명을 포함한 전체 클래스명" scope="page|request|session|application" />
+
+    참고)
+        JSP 내장 객체: 속성을 관리할 수 있는 객체
+                    -> View(JSP)에서 EL식 변수로 사용할 수 있는 데이터 전달
+                    
+            PageContext pageContext
+            HttpServletRequest request
+            HttpSession session
+            ServletContext application
+
+
+            pageContext < request < session < application
+
+                - void setAttribute(String key, Object value);
+                - Object getAttribute(String key);
+                - void removeAttribute(String key);
+
+
+2) 자바빈즈 작성 규칙
+    - 기본 생성자로만 객체를 생성 / 클래스에 기본 생성자가 존재
+
+3) useBean 액션 태그로 자바빈즈 사용하기
+
+참고)
+    JSP에서 액션태그, 커스텀태그 정의 -> JSP 페이지 내에서 java 코드를 사용하는 것을 지양
+
+4) setProperty 액션 태그로 프로퍼티 값 저장하기
+<jsp:setProperty name="자바 빈 식별 이름" property="속성명" value="값" />
+    useBean scope="request" -> setProperty property 속성명과 form의 name이 같으면 자동으로 값이 저장
+
+    param 속성: - name쪽 이름 정하면 -> property에 정의된 속성명에 매칭
+
+5) getProperty 액션 태그로 프로퍼티의 값 가져오기
+<jsp:getProperty name="자바 빈 식별 이름" property="속성명" />

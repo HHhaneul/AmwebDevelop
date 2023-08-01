@@ -1,0 +1,163 @@
+열거형(enums)
+1. 열거형이란?
+	- 정적 상수만을 위해 용도가 정해진 클래스의 일종
+
+2. 열거형 정의와 사용
+
+enum 클래스 {
+	상수
+	...
+
+}
+
+== 
+
+switch ~ case
+
+3. 모든 열거형의 상위 클래스 - java.lang.Enum
+	1. extends java.lang.Enum
+	2. 상수 -> 정적 상수 객체
+	3. 모든 생성자: private 접근 제어자
+		-> 외부에서 객체를 생성할 수 있으면 상수로써 의미 X
+
+1) Enum 클래스에 정의된 메서드
+	String name(), String toString(): Enum 상수 이름 문자열
+	int ordinal(): Enum 상수의 위치 번호(0부터 시작)
+
+	static T valueOf(....) : 문자열 -> Enum 상수로 변환
+
+2) 컴파일러가 자동으로 추가해주는 메서드
+	values(): Enum 클래스의 상수 목록을 배열로 반환
+	.valueOf(String name): 문자열 -> 현재 Enum클래스의 상수 변환
+
+4. 열거형에 멤버 추가하기
+5. 열거형에 추상메서드 추가하기
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+
+enum MemberType{
+	USER,
+	ADMIN,
+	
+}
+
+0 - 관리자 // ordinal 써버리면...? USER가 관리자가 되어버림!
+
+
+-------------------------------------------------------------------------------
+public enum Transportation { // class Transportation extends java.lang.Enum { .. }
+    BUS,
+    TAXI,
+    SUBWAY
+}
+-------------------------------------------------------------------------------
+public class Transportation extends java.lang.Enum {
+
+	public static final Transportation BUS = new Transportation();
+	public static final Transportation TAXI = new Transportation();
+	public static final Transportation SUBWAY = new Transportation();
+
+}
+-------------------------------------------------------------------------------
+Enum 클래스
+	- 정적 상수만을 정의하기 위한 용도가 제한된 클래스의 일종
+
+	- java.lang.Enum 클래스의 하위 클래스
+		class Transportation extends java.lang.Enum{
+
+		}
+
+	- 상수는 열거하듯이 정의
+		enum Transportation{
+			BUS,
+			TAXI,
+			SUBWAY	
+		}
+
+		class Transportation extends java.lang.Enum {
+			public static final Transportation BUS = new Transportation();
+			public static final Transportation TAXI = new Transportation();
+			public static final Transportation SUBWAY = new Transportation();
+		}
+
+	- 생성자 메서드 - private // 내부에서만 가능! - 상수로써의 특징을 유지
+		class Transportation extends java.lang.Enum {
+			public static final Transportation BUS = new Transportation();
+			public static final Transportation TAXI = new Transportation();
+			public static final Transportation SUBWAY = new Transportation();
+
+			private Transportation(){}
+		}
+
+		== 
+	
+	- 추상 클래스
+		abstract class Transportation extends java.lang.Enum {
+			public static final Transportation BUS = new Transportation();
+			public static final Transportation TAXI = new Transportation();
+			public static final Transportation SUBWAY = new Transportation();
+
+			private Transportation(){}
+		}
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

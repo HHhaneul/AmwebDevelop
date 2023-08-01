@@ -1,0 +1,153 @@
+애너테이션(annotation)
+
+1. 애너테이션이란?
+	- 주석, 주해 ...
+	- 설명, 정보전달
+
+2. 표준 애너테이션
+	JDK에 정의된 애너테이션
+	@Override: 재정의된 메서드임을 알려주는 애너테이션
+	@Deprecated: 앞으로 사용을 하지 않을 가능성 -> 다른 메서드를 사용할 것을 권장 
+	@FuntionalInterface: 함수형 인터페이스임을 알려주는 애너테이션
+
+3. 메타 애너테이션
+	- 에너테이션을 정의할 수 있는 애너테이션
+	@Target: 적용 대상
+	@Retention: 정보 확인 시점
+		RentionPolicy
+			.SOURCE: 소스에 포함(java), 컴파일 이후(class)제거. : 컴파일 시 정보 전달
+			.CLASS: 기본값 - 소스에는 포함(java) 클래스 파일(class): 정보 전달 X
+			.RUNTIME: 소스에 포함(java), 클래스 파일(class): 실행 중에 정보 전달
+
+
+
+4. 사용자 정의 애너테이션
+	@interface 애노테이션명{
+
+	}
+
+	설정 항목: 추상 메서드,
+	value(): 기본 항목 : value 속성만 설정하는 경우는 value=을 생략
+
+		- default 기본값;
+
+
+
+	- 모든 애너테이션은 java.lang.annotation.Annotation 인터페이스를 상속
+
+	@interface MyAnno{
+
+	}
+		// 위 아래 동일
+	interface MyAnno extends java.lang.annotation.Annotation{
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

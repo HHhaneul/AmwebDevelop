@@ -1,0 +1,142 @@
+maven
+- 빌드, 의존성(필요한 라이브러리 jar(Java Archive))관리, 배포, 테스트
+
+1. 설치
+- 자바 설치, JAVA_HOME 환경 변수 설정
+E:\apache-maven-3.9.3\bin
+
+2. 사용
+1) maven 프로젝트 생성
+	mvn archetype:generate
+	groupId: 소속된 그룹(도메인 방식)
+		예) org.koreait
+	artifactId: 프로젝트 구분 명칭
+
+	프로젝트 디렉토리 구조
+		클래스 패스: 클래스 파일을 인식할 수 있는 경로
+
+		src/main/java: 작성하는 자바코드(.java)
+		src/main/resources: 정적 자원
+				- 설정 파일(xml, properties)
+				- css, js, 이미지
+
+		src/test/java: 테스트 자바 코드(.java)
+		src/test/resources: 테스트 시 필요 정적 자원
+
+	pom.xml: maven 설정 파일
+		 <properties>
+    		 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>: 소스 인코딩
+   		 	<maven.compiler.source>20</maven.compiler.source>: 소스 컴파일 자바 버전
+   		 	<maven.compiler.target>20</maven.compiler.target>: 소스
+ 		 </properties>
+
+		- 의존성 설정
+		<dependencies>
+
+		</dependencies>
+
+			사용자명/.m2 -> 메이븐 레포지토리
+
+			scope
+				- compile(기본값): 빌드 시 포함, 배포 시 포함
+				- runtime: 빌드 시 포함 X, 실행할 때는 필요한 라이브러리
+				- provided: 개발 시에만 필요, 빌드 및 배포 시에는 미포함 -> 플랫폼 내에서 제공되는 라이브러리
+					예) servlet-api, servlet.jsp-api
+				- test: 테스트 시에만 필요한 라이브러리
+
+		mvn compile: java파일 -> class 컴파일(target 폴더)
+
+		mvn clean: 컴파일 소스 전체 지우기(target 폴더 삭제)
+
+			예) 기존 컴파일 소스 삭제 후 다시 컴파일
+				mvn clean compile
+		mvn test: 테스트 케이스를 실행(전체)
+
+		mvn package: 배포 파일 생성(jar)
+			compile -> build -> test -> package(jar)
+				-> 테스트 미통과시 배포 X
+
+			mvn) 기존 컴파일 소스 삭제 후 배포 실행
+				mvn clean package
+
+
+lombok
+1. 의존설정
+2. 사용
+	@Getter: - getter 패턴 자동 생성
+	@Setter: - setter 패턴을 자동 생성
+	@ToString: - toString 패턴을 자동 생성
+		Exclude - ToString에서 배제할 항목 선택
+
+	@NoArgsConstructor: 기본 생성자(매개변수 X)
+	@AllArgsConstructor: 모든 매개변수를 초기화하는 생성자 패턴
+	@RequiredArgsConstructor: 초기화가 반드시 필요한 멤버 변수를 매개변수로 하는 생성자
+				1) 멤버 변수가 상수(final)일 때 -> 반드시 초기화
+				2) @NonNull이 붙어있는 멤버 변수
+
+	@EqualsAndHashCods: equals, hashcode 메서드 자동 생성
+
+	@Data: @Getter + @Setter + @ToString + @EqualsAndHashCode
+
+	@Log: log 멤버변수 자동 추가
+		trace(), debug(), info, warn(), ...
+
+	@Builder: builder 패턴 자동 완성
+
+	참고)
+		builder 패턴
+			- 객체 생성을 직접 X,
+				- 기본생성자가 private
+			- setter를 대신할 수 있는 대안적인 패턴
+				-1) 정적 내부 클래스인 Builder
+					- 객체를 생성
+					- 멤버 변수 초기화(메서드 체이닝)
+					- 멤버 변수명과 동일한 메서드명(setter를 대신)
+
+				-2) build()를 통해서 생성된 객체 반환
+
+	버전 표기법
+	1.	18.	28
+	메이저	마이너	패치
+
+	패치 - 오류, 기능 개선
+	마이너 - 하위 버전에 호환성에 문제가 없는 기능추가, 변경
+	메이저 - 하위 버전에 호환이 안되는 큰 변화
+
+	
+	소스 보기
+	CTRL + 마우스 왼쪽키
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+// 시험 나옴.
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

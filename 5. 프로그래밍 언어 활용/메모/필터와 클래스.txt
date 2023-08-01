@@ -1,0 +1,30 @@
+필터와 래퍼\
+
+- 요청과 응답 사이에서 걸러주는 기능
+
+1. 필터 클래스, 필터 객체, 필터
+	Filter 인터페이스를 구현 -> 필터 클래스
+
+2. 필터가 위치하는 곳
+
+3. 필터 클래스의 작성, 설치, 등록
+	web.xml
+		<filter>
+			<filter-name>..</filter-name>
+			<filter-class>...</filter-class>
+		</filter>
+		<filter-mapping>
+			<filter-name>...</filter-name>
+			<url-pattern>...</url-pattern>
+		</filter-mapping>
+
+
+
+	- 필터 체인(filter chain)
+
+4. 필터 클래스의 init 메서드와 destroy 메서드
+5. 래퍼 클래스 작성 및 적용하기
+
+HttpServletRequest의 편의 구현 클래스 HttpServletRequestWrapper
+
+HttpServletResponse의 편의 구현 클래스 HttpServletResponseWrapper

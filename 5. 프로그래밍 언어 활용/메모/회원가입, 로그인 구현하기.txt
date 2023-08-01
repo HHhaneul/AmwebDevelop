@@ -1,0 +1,75 @@
+회원가입, 로그인 구현하기
+
+
+
+테스트 케이스: 설계 - > 테스트가 통과 -> 기능 구현 -> 리팩토링 -> 테스트
+
+유효성 검사: 필수 항목 검증
+
+HttpServletRequest request: 인터페이스 - 톰캣 구동 시 요청 유입 시에만 만들어지는 객체
+                                      - 테스트 상황에서는 동일한 형태의 객체를 생성 X
+
+- getParameter
+
+-> 모의 객체(Mockito)
+-> 가짜 데이터(stub)
+
+
+-----------------------------------------------------------------------------------------
+
+-> 사용자명(아이디)님 로그인... / 로그아웃
+-> 회원가입 / 로그인
+
+controllers
+회원가입
+    JoinController - /member/join
+로그인
+    LoginController - /member/login
+로그아웃
+    LogoutController - /member/logout
+
+메인페이지
+    IndexController - /index.jsp
+
+models.member: 회원 관련 기능
+
+회원가입 기능
+    JoinService
+        join(...)
+            - DTP(Data Transfer Object): Member
+            - Validator: JoinValidator --> Validator::check(...)
+            - MemberDao: exists, register
+
+로그인 기능
+    LoginService
+        login(...)
+            - DTO: HttpServletRequest request
+            - Validator: LoginValidator --> Validator::check(..)
+            - MemberDao: exists, get()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

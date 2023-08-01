@@ -1,0 +1,37 @@
+JSP 내장 객체
+1. HttpServletRequest request: 요청 정보, 요청 관련 기능
+2. HttpServletResponse response: 응답 정보, 응답 관련
+3. PageContext pageContext: JSP 서블릿 환경에 대한 
+4. ServletContext application
+5. HttpSession session
+6. JspWriter out: 출력
+7. Object page: this
+8. Throwable exception
+9. ServletConfig config: 설정
+
+속성 처리 객체와 메서드 종류
+pageContext, request, session, application
+
+pageContext < request < session < application
+
+
+PageContext pageContext: 현재 JSP 페이지 내에서 유지되는 속성 값
+HttpServletRequest: 요청이 처리되는 동안 유지되는 속성 값
+HttpSession session: 세션이 유지되는 동안 속성 값
+ServletContext application: 애플리케이션이 유지되는 동안 속성 값
+
+
+1. setAttribute(String name, Object value)
+2. getAttribute(String name)
+3. removeAttribute(String name)
+4. Enumeration getAttributeNames()
+
+- EL식에서 속성값 -> 변수와 같이 사용
+- 같은 속성명이 있을 때 변수로 사용되는 범위는 범위가 좁은 순서대로 먼저 적용
+
+
+
+참고)
+    getAttribute(String name)
+
+    getParameter(String name)

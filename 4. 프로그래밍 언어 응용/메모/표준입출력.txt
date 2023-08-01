@@ -1,0 +1,75 @@
+표준입출력: 콘솔에 입력, 출력
+1. System.in: InputStream: 콘솔에서 입력 / 바이트 단위 스트림 -> 문자 단위 스트림으로 변환(InputStreamReader)
+						     -> 문자 단위 버퍼 보조스트림(BufferedReader)
+
+2. System.out: PrintStream
+		print(...): 출력
+		println(...): 출력 + 줄개행
+		printf(...): 형식화 + 출력
+
+3. System.err: PrintStream: 글자 색이 발간색
+
+참고)
+PrintWriter
+
+setIn(InputStream)
+setOut(PrintStream ...)
+setErr(PrintStream ...)
+
+File
+- 파일과 디렉토리와 관련된 기능
+	String pathSeparator: 환경 변수 구분 문자
+		윈도우즈 ;
+		맥 & 리눅스: /
+
+
+	String separator: 경로 구분 문자
+		윈도우즈 : \
+		맥 & 리눅스 : /
+
+
+
+	rwx
+	421
+
+
+
+직렬화(Serialization)
+- 객체에 저장된 데이터를 스트림에 쓰기(write)위해 연속적인(serial) 데이터로 변환하는 것을 말한다.
+	- 객체에서 복구에 필요한 값만 직렬화(저장)
+		- 멤버 변수의 값만 저장
+		- 변경이 되지 않는 상수, 메서드 등등은 직렬화 X
+
+1. ObjectInputStream
+2. ObjectOutputStream
+
+
+직렬화 제외(저장 제외)
+	transient 예약어 추가
+
+참고)
+	InputStreamReader: 바이트 단위 입력 스트림 -> 문자 단위
+
+	OutputStreamWriter: 바이트 단위 출력 스트림 -> 문자 단위
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

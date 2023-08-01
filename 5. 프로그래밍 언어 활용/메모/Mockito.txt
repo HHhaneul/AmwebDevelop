@@ -1,0 +1,25 @@
+Mockito 기초 사용법
+mockup
+1. 의존 설정
+	- mockito-core
+	- mockito-junit-jupiter: junit에 모의 객체 생성 편의 기능 추가
+		@Mock
+
+		@ExtendWith
+
+2. 모의 객체 생성
+	mock(Class class)
+
+3. 스텁 설정
+	- 가짜 데이터를 생성
+	- given(메서드 호출): 반환값이 있는 경우
+		.willReturn(반환값)
+		.willThrow(예외 클래스.class)
+
+	- willThrow(예외 클래스.class): 반환값이 없는 메서드
+		.given(모의 객체)
+		.메서드(...)
+
+
+4. 인자 매칭 처리
+	- ArgumentMatchers

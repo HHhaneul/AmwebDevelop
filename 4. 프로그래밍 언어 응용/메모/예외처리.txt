@@ -1,0 +1,252 @@
+예외처리
+1. 오류와 예외
+	오류(Error): 
+
+
+
+
+2. 예외 클래스의 종류
+			
+		Throwable
+	
+	Error		Exception
+
+
+Exception
+	- Exception을 바로 상속 받은 예외 클래스
+	예) java.io.IOExeption / 파일 읽을 때, 쓸 때 (FileInputStream, FileOutputStream)
+
+	    java.io.FileNotFoundException
+
+	    - 예외가 있든 없든 처리가 안되어 있으면 컴파일X	
+	    - 예외의 체크는 컴파일 시 체크, 예외가 있으면 컴파일X
+	    - 예외가 발생하든 안하든 반드시 적절한 예외 처리가 필요한 예외
+	    - 엄격한 예외, 형식을 매우 중시
+
+	- RuntimeException을 중간에 상속 받은 예외 클래스
+		- Runtime: 실행
+	예) java.lang.ArithmeticException: 0으로 나눌 때 발생
+
+	- 예외가 발생하더라도 컴파일 O, class파일 생성
+	- 예외의 체크는 실행 중 체크, 실행이 되려면? class파일 필요(컴파일은 된다...)
+	- 유연한 예외 , 형식을 중요시하지 않음.
+	
+	
+	예외가 발생하면 프로그램 중단! -> 프로그램 중단을 막기 위한 조치 
+		- 예외처리의 목적: 예외가 발생 시 적절한 조치 -> 서비스 중단을 막는 것
+	
+참고)
+	java.exe: 클래스파일 실행
+	javac.exe: java -> class 컴파일
+
+예외 처리하기
+1. try ~ catch문
+
+try {
+	// 예외가 발생할 가능성이 있는 코드
+
+} catch(예외 객체 ...) {
+	// 예외 발생 시 처리할 코드
+
+}
+
+참고)
+	예외 발생
+	throw 예외객체;
+
+	예외, 오류 -> 원인을 확인을 하는 것이 중요
+
+	
+	예외 클래스 주요 메서드: 정보확인
+		java.lang.Throwble
+				- String getMessage() - 오류 메세지 확인
+				- void printStackTrace() - 자세한 오류 메세지
+
+
+2. try-catch-finally문
+	- 자원을 소비하는 객체 - FileInputStream, FileOutStream, Connection, PrepareStatement ...
+	- 자원 해제 -> 애플리케이션 종료시에 해제
+	- 서버? 종료 X -> 자원 해제를 하지 않으면 메모르 부족 현상 발생
+	- 자원해제를 적절하게 해야 된다.(close()...)
+	
+	try{
+
+	} catch(...){
+
+	} finally{
+		// 예외가 발생 하던 안하던 항상 실행되는 코드
+		// return 하더라도 코드가 실행	
+	}
+
+3. try-with-resources
+	- JDK7에서 추가
+	- 자원 해제를 자동으로 해준다.
+
+	try(해제할 자원 객체;
+	    해제할 자원 객체 ...){
+		// 예외가 발생할 가능성이 있는 코드
+	
+	}catch(예외객체){
+
+	}
+	
+	자원 해제 기준
+		AutoCloseable 인터페이스 구현 클래스
+			- close() 메서드를 자동 호출
+ 	
+	참고)
+		instanceof	
+
+
+예외 처리 미루기
+1. 예외 처리를 미루는 throws 사용하기
+	- 메서드를 호출 하는 쪽에서 예외 처리 전가
+	- 전가시키는 예외에 대해서 명시 (throws)
+		메서드 매개변수 뒤 throws 전가할 예외, ...
+	- Exception을 상속 받은 경우(RuntimeException이 없는 경우)
+
+2. 다중 예외 처리
+	ArithmethicException
+	NullPointerException
+
+	try{
+
+	}catch (ArithmethicException e){
+		// ...
+	}catch (NullPointerException){
+		// ...
+	}	
+
+
+	try{
+
+	} catch (ArithmethicException | NullPointerException e){
+
+	}
+
+// Exceptions e를 가장 많이 사용함. // 다형성을 활용하여 상위클래스인 Exception을 활용.
+				// 다양한 Exception 하위클래스를 사용가능.
+
+	try{
+
+	} catch (Exception e){
+		
+	}
+
+
+3. 사용자 정의 예외
+	- JDK 기본 정의 예외 외에 따로 정의하는 예외
+	- 로그인 기능
+		- 아이디, 비밀번호
+		- 아이디 일치 X -> 예외발생
+		- 비밀번호 일치 X -> 예외발생
+
+	예외 클래스 작성 - Exception, RumtimeException 상속, 생성자만 정의
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,124 @@
+람다식(Lamba expression)
+
+1. 람다식이란?
+	- 메서드(함수)를 하나의 식으로 표현
+	
+	- 함수형 프로그래밍
+		- 함수란?
+			- 하나의 기능(단일기능)
+
+		- 함수는 값으로 사용
+			- 매개변수
+			- 반환값
+
+	자바의 함수는 값으로 사용불가
+		- 인터페이스의 객체가 되는 조건을 이용
+		- 형식을 단순화
+
+2. 람다식 문법 살펴보기
+	1) 접근제어자, 반환 값 타입, 함수명을 생략
+	2) 매개변수 정의 부분과 함수 구현 구분({}) 사이에 -> 추가	
+	3) 매개변수의 자료형 생략가능
+	4) 구현코드가 한 줄일때는 { ... } 생략가능, return 예약어도 생략 해야 된다.
+	5) 최대한 짧게 쓰는 방향(변수명도 한 글자로 하는 것이 권장)
+	6) 매개변수가 1개이면 (...)로 생략 가능
+	7) 매개변수가 없으면 (...)는 생략 불가
+
+3. 람다식 사용하기
+4. 함수형 인터페이스(Functional Interface)
+@FunctionalInterface: 단일 기능만 정의 형식 체크
+
+5. 함수형 인터페이스 타입의 매개변수와 반환 타입
+6. java.util.function 패키지
+- 함수형 인터페이스를 정의해 놓은 편의 패키지
+
+1) 매개변수X, 반환값만 있는 형태
+Supplier<T>	T get()
+
+2) 매개변수O, 반환값이 X
+Consumer<T>	void accept(T t)
+
+3) 매개변수 O, 반환값 O
+Function<T, R>	R apply(T t)
+
+4) 매개변수 O(1), 반환값 boolean
+Predicate<T>	boolean test(T t)
+
+- 매개변수가 2개일 때 접두어 Bi
+1) BiConsumer<T, U> void accept(T t, U u);
+
+2) BiFunction<T, U, R> R apply(T t, U u);
+
+3) BiPredicate<T, U> boolean test(T t, U u);
+
+
+- 매개변수와 반환값이 자료형이 같은 경우
+1) 매개변수 1개
+UnaryOperator<T>		T apply(T t)
+참고)
+	Function<T T>
+
+2) 매개변수가 2개
+BinaryOperator<T>		T apply(T t1, T t2);
+
+참고)
+	BiFunction<T, T, T>
+
+- 기본형을 처리하기위한 함수형 인터페이스
+
+DouubleToIntFucntion
+
+-> 매개변수는 double, 반환값은 int
+
+
+ToIntBiFunction<T, U>
+-> 매개변수는 T, U, 반환값은 int
+
+
+7. Function의 합성과 Predicate의 결합
+Function
+	f.andThen(g): f와 g를 결합 -> 새로은 함수
+	g.compose(f): f와 g를 결합 -> 새로운 함수
+
+	
+	static identity(): 항둥 함수 (x -> x)
+
+
+Predicate
+	논리 연산자
+		and(...): AND 연산
+		or(...): OR 연산
+		negate(...): NOT 연산
+
+8. 메서드 참조
+	-> 매개변수를 구현체에서 그대로 사용하는 경우
+	-> 클래스명::메서드명
+	-> 참조변수::메서드명
+		- 외부 보다는 내부
+
+	-> 반환값이 생성된 객체
+		-> 클래스명::new
+
+------------------------------------------------------
+java.util.function 패키지
+
+1) 매개변수X, 반환값이 O
+Supplier<T> 	T get()
+
+2) 매개변수O, 반환값 X
+Consumer<T> 	void accept(T t)
+
+3) 매개변수O, 반환값 O
+Function<T, R>	R apply(T t)
+
+4) 매개변수 O, 반환값 boolean
+Predicate<T>	boolean test(T t)
+
+------------------------------------------------------
+
+
+
+
+
+
+

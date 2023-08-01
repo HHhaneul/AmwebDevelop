@@ -1,0 +1,221 @@
+java.lang 패키지
+- 기본적으로 많이 사용하는 클래스들이 포함
+
+예) String
+	java.lang.String
+
+컴파일러가 패키지명 바로 아래쪽 import java.lang.*; 추가
+- lang 패키지의 모든 클래스는 그냥 사용 가능
+
+Object 클래스
+	- 모든 클래스의 상위 클래스
+	- 상속이 명시 X -> extends java.lang.Object 클래스 자동 추가
+
+- Object 클래스에 정의된 메서드
+1. toString() 메서드
+	- 객체의 참조 변수를 출력할 때 자동 호출
+
+	public String toString(){
+		return getClass().getName() + "@" + Integer.toHexString(hashCode());
+	}
+
+
+	getClass().getName(): 패키지명을 포함한 클래스 명
+
+	- 재정의를 통해서 멤버 변수의 값을 확인하는 용도로 많이 사용
+
+	참고)
+		Object
+		Class getClass()
+		
+		Class 객체: 클래스 로더에 의해서 생성: 클래스 정보가 담겨 있는 객체
+			- 모든 클래스의 정적 변수로 class가 존재
+			- Object::getClass(): 인스턴스 메서드: 객체 생성 후 Class 객체 조회
+				- 클래스 내부에서 클래스 정보를 조회
+				
+
+2. equals() 메서드
+	public boolean equals(Object obj){
+		return (this==obj);
+	}
+
+	- 동일성 비교: 동일한 주소 (==)
+
+	- 동등성 비교: 동등한 가치를 가지고 있는지
+			equals(...) 재정의를 통해서 동등성 비교
+
+3. hasgCode() 메서드
+	- 객체의 주소값
+
+	- 검색을 위한 유일한 값
+	- Object에 정의된 기본 값: 객체의 주소 (유일한 값의 측면에서...)
+	
+	- 일반적으로 동등성 비교는 equals and hashCode
+
+
+참고)
+	컬렉션 프레임워크
+		Set(집합): 중복 X
+		
+
+	java.util 패키지: 편의 기능이 모여져 있는 패키지
+		- Objects: 객체의 편의 기능
+		- Arrays: 배열의 편의 기능
+		- Collections: 컬렉션의 편의 기능
+		- Collectors 
+
+	static Objects.hash(Object... values)
+		... : 가변 매개변수	
+
+String 클래스
+
+1. String을 선언하는 두 가지 방법
+	String 변수명 = "문자열"; - 문자열 상수: 하나의 객체만 생성
+	String 변수명 = new String("문자열"); - 생성할 때마다 다른 객체가 생성
+
+	문자열의 객체의 형태가 다양하므로 equals(...): 동등성 비교를 한다. // 동일한 가치!
+
+2. String을 클래스의 final char[] 변수(JDK11)
+	문자열: 문자(char)가 여러개 줄지어 있는 형태
+	
+	private final byte[] values: 상수
+		-> 문자열은 한 번 생성이 되면 변경 불가
+		-> 문자열 개수만큼 배열이 생성, 변경 X
+		-> 문자열을 결합할 때마다 공간의 크기가 변경 -> 새로 만들어서 변경
+		-> 문자열 결합을 많이 할수록 성능 저하 문제가 발생
+
+	참고)
+	JDK12
+		final byte[] ...
+
+3. StringBuffer와 StringBuilder 클래스 사용하기
+
+	byte[] values: 버퍼(기본 값: 16byte)
+
+	참고)
+		버퍼(buffer): 임시 메모리 공간
+
+
+Wrapper 클래스
+- 기본 자료형을 위한 클래스
+	- 기본자료형의 기능을 구현하기위해서
+
+정수형			클래스
+	byte		Byte
+	short		Short
+	int		Integer
+	long		Long
+
+실수형
+	float		Float
+	double		Double
+
+논리형
+	boolean  	Boolean
+
+문자형
+	char		Character
+
+
+class Integer{
+	...
+	
+	private final int value;
+
+	...
+}
+
+1. Wrapper 클래스의 종류
+
+2. Integer 클래스 사용하기
+1) Integer 클래스의 메서드
+
+3. 오토박싱과 언박싱
+
+	- 오토박싱
+		- 기본형 -> Wrapper 클래스의 객체
+		int num1 = 10;
+		Integer num2 = num1; //Integer num2 = Integer.valueOf(num1);
+
+	- 언박싱
+		Wrapper 클래스의 객체 -> 기본형
+		int num3 = num1 + num2; // int num3 = num1 + num2.intValue();
+
+
+	참고)
+		new Integer(...): Deprecated / 권장하상 Integer.valueOf(...)
+
+	변환기능
+	
+		int intValue();
+		long longValue();
+		double doubleValue();
+		...
+		
+		Integer
+			static int parseInt(String s); : 문자열 -> 정수(int)
+
+		Double
+			static double parseDouble(String s); : 문자열 -> 실수(double)
+
+
+
+		java.lang.Number:  추상 클래스
+			- Byte, Short, Integer, Double, Float...
+	
+Class 클래스
+	- 클래스의 정보가 담겨있는 객체
+	- 자동 생성되는 객체
+	- 모든 클래스의 정적 변수 class
+	- Object::getClass()
+
+1. Class 클래스를 선언하고 클래스 정보를 가져오는 방법
+	
+2. Class 클래스를 활용해 클래스 정보 알아보기
+
+3. Class.forName()을 사용해 동적 로딩 하기
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

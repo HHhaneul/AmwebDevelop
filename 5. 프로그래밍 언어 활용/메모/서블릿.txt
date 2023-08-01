@@ -1,0 +1,59 @@
+서블릿(Servlet)
+1. 서블릿(Servlet)의 개요
+	- 자바의 웹 기술 
+	
+	jakarta ee
+		servlet-api 
+				
+				
+	API(Application Programming Interface)
+	
+	
+2. 서블릿(Servlet) 클래스 작성하기
+	HttpServlet 추상 클래스를 상속 -> 서블릿 클래스 
+	
+	- 웹서버는 멀티 쓰레드 방식으로 동작 / 서블릿 객체를 공유 / 인스턴스 변수는 동시성 문제 발생 가능성, 사용을 지양 
+	
+	
+	인터페이스 
+		HttpServletRequest  : 요청과 관련된 기능, 정보 객체 
+			
+		HttpServletResponse : 응답과 관련된 기능, 정보 객체 
+	 
+
+3. web.xml 파일에 서블릿(Servlet) 등록하기
+	webapp/WEB-INF/web.xml 
+	
+	- 배치 설명자 파일 
+	<web-app ...>
+		<servlet>
+			<servlet-name></servlet-name>
+			<servlet-class></servlet-class>
+			<init-param>
+				<param-name>설정명</param-name>
+				<param-value>설정값</param-value>
+			<init-param>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name></servlet-name>
+			<url-pattern></url-pattern>
+		</servlet-mapping>
+	</web-app>
+	
+4. XML 문법의 기초
+	<?xml version="1.0" encoding="UTF-8" ?>
+	
+5. 웹 브라우저로부터 데이터 입력 받기
+6. init메서드와  destroy 메서드
+	 init() - 가장 처음 호출(한번만)
+			- 설정 
+			- ServletConfig 구현 객체 -> 설정값 조회
+					- String getInitParameter(String name)
+					
+	 요청 메서드 호출 - 여러번 
+	 
+	 destroy() - 가장 마지막에 호출(한번만)
+               - 자원 정리..
+				 
+7. @WebServlet  : url mapping 정보를 제공 
+	servlet 3.0

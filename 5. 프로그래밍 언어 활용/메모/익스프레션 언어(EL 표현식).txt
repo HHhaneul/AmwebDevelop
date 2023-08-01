@@ -1,0 +1,111 @@
+익스프레션 언어(EL 표현식)
+연산식
+${식} / 연산, 속성(변수)
+1. 애트리뷰터 형태로 전달되는 데이터
+- setAttribute, getAttreibute, removeAttribute
+
+속성을 관리하는 내장 객체
+1. PageContext pageContext
+2. HttpServletRequest request
+3. HttpSession session
+4. ServletContext application
+
+범위
+pageContext < request < session < application
+
+변수 적용 우선 순위
+pageContext > request > session > application
+
+2. 애트리뷰트 값을 출력하는 EL식
+    setAttribute("값")
+
+
+
+
+
+
+3. JSP/서블릿 기술에서 사용되는 네 종류의 애트리뷰트
+1) page
+2) request
+3) session
+4) application
+5) EL 식 안에 있는 데이터 이름이 해석되는 순서
+
+익스프레션 언어 내장 객체
+1. 익스프레션 언어의 내장 객체
+속성값을 범위에 따라 조회할 수 있는 객체(map)
+    마침표(.), 대괄호(['속성명'])
+
+    -> getter 메소드 -> get을 제외하고 바로 접근
+
+1) pageScope: pageContext 속성
+2) requestScope: request 속성
+3) sessionScope: session 속성
+4) applicationScope: application 속성
+
+5) param
+    - 마침표, 대괄호
+    - 요청 데이터를 name으로 조회
+    참고)
+        HttpServletRequest
+            .getParameter(String name)
+
+6. paramValue
+    - 한 항목에 대한 여러 요청 데이터를 조회
+
+    참고)
+        HttpServletRequest
+            .getParameterValues(String name);
+
+    [0], [1]
+
+7) header
+    요청 헤더 조회
+    HttpServletRequest
+        getHeader(String name);
+
+8) headerValues
+
+9) cookie
+    - 개인화된 서비스 구현 기술
+
+    참고)
+        HttpServletRequest
+            Cookie[] getCookies()
+
+10) initParam
+    - 설정값을 조회
+    <context-param>
+        <param-name></param-name>
+        <param-value></param-value>
+    </context-param>
+
+11) pageContext
+    - JSP 페이지의 주변 환경에 대한 정보를 제공하는 객체
+    - 내장 객체를 생성해주는 getter 형식의 메서드가 정의
+
+익스프레션 언어의 연산자
+1. 익스프레션 언어의 연산자
+    lt - lesser than : <
+    gt - greater than : >
+    le - lesser than and equal : <=
+    ge - greater than and equal : <=
+    eq - equal : ==
+    ne - not eq : !=
+
+    논리 연산자
+        && / AND
+        || / OR
+        ! / NOT
+
+2. 엠프티 연산자
+    ${empty str}
+
+3. 대괄화 연산자와 마침표 연산자
+    EL식 속성: 객체 -> 객체의 각 속성명을 접근(getter 호출)
+    예) ${book.title} -> book.getTitle()
+        ${book['title']}
+
+        마침표로 사용하는 경우는 변수명 규칙과 동일하게 적용
+            - 앞에는 숫자 X 예) nums['0']
+            - 특수문자 $, _ 예) num-1 (X) -> 대괄호 연산자 ['num-1']
