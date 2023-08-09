@@ -1,0 +1,82 @@
+AOP 프로그래밍
+(Aspect Oriented Programming)
+spring-aop API
+aspectjweaver
+
+1. 프록시(proxy)
+
+팩토리얼 연산
+factorial
+
+!5 -> 5 * 4 * 3 * 2 * 1
+
+
+참고) BufferedInputStream
+
+class BufferedInputStream extends InputStream{
+
+    private InputStream in;
+
+    public BufferedInputStream(InputStream in){
+        this.in = in;
+    }
+
+    public int read(){
+        
+        // 버퍼 기능 관련 코드.. - 추가 공통 기능
+
+        int ch = in.read(); // 핵심 기능
+        
+        // 버퍼 기능 관련 코드.. - 추가 공통 기능
+
+        return ch;
+    }
+
+}
+
+2. AOP(Aspect Oriented Programming)
+spring-aop api
+
+1) @Aspect
+    : 공통 기능을 정의한 클래스
+
+2) @Pointcut: 공통 기능을 적용할 메서드의 패턴
+    - excution 명시자: ANT 패턴 형식
+
+    패키지
+        aopex.* : aopex 패키지의 모든 하위 클래스
+        aopex..*: aopex 패키지를 포함한 하위 패키지의 모든 클래스
+
+        aopex.*.* : aopex 패키지의 모든 하위클래스(.*)의 모든 메서드(.*)
+        aopex..*.* : aopex 패키지를 포함한 하위패키지의 모든 클래스 (..*), 모든 메서드(.*)
+
+    메서드
+        (..): 0개 이상의 매개변수 - 매개변수가 있어도 되고 없어도 되는 형태
+        (): 매개변수가 없는 형태
+        (*): 매개변수가 1개
+        (*,*): 매개변수가 2개
+
+3) @Around: 공통 기능을 정의한 메서드
+    ProceedingJoinPoint
+        - Object proceed(): 핵심 기능을 대신 호출
+        - Signature getSignature(): 메서드의 대한 정보
+            - String getName(): 이름
+            - String toLongString(): 반환값 타입, 매개변수 타입, ...
+            - String toShortString()
+
+        - Object getTarget(): 대상 객체
+        - Object[] getArgs(): 매개변수로 사용된 값
+
+    참고)
+
+        @EnableAspectJAutoProxy -> 설정 자동화
+
+3. @Order
+
+    ProxyCache -> ProxyCalculator
+        -> 캐시 저장 기능이 정상 동작
+
+    프록시의 실행 순서가 중요한 경우 @Order 애노테이션으로 실행 순서를 설정
+
+4. 프록시 생성방식
+5. @Around의 Pointcut 설정과 @Pointcut 재사용

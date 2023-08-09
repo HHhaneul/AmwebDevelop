@@ -1,0 +1,12 @@
+컴포넌트 스캔 시 기준 애노테이션
+@Component
+@Service
+@Inject
+
+@Configuration
+@Controller
+@RestController
+@Repository
+@ControllerAdvice
+@RestControllerAdvice
+@Aspect

@@ -1,0 +1,6 @@
+타임리프 페이지 레이아웃
+th:replace
+    - 특정 템플릿 파일에 있는 부분 HTML을 치환
+
+th:fragment
+    - 치환될 부분 HTML이 정의된 영역

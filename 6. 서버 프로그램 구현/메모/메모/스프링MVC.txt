@@ -1,0 +1,25 @@
+스프링 MVC 시작하기
+1. 스프링 MVC 설정
+1) 의존성
+    - spring-webmvc
+    
+
+2) @EnableWebMv
+3) @configureDefaultServletHabdling
+4) @configureViewResolvers
+5) @addResourceHandlers
+
+2. WebMvcConfigurer 인터페이스
+    - WebMvc의 설정 항목1
+
+3. web.xml 파일에 DispatcherServlet 설정
+
+
+4. 코드 및 뷰 구현
+
+5. 스프링 MVC 프레임워크 동작 방식
+
+6. 정리
+1) DispatcherServlet
+2) HandlerMapping
+3)

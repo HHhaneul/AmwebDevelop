@@ -1,0 +1,153 @@
+스프링 MVC
+    spring-webmvc
+    servlet-api
+    spring-jdbc
+    tomcat-jdbc
+    ojdbc8
+    slf4i-api + logback classic
+    thymeleaf spring6
+    thymeleaf extras java8time: #temporals
+    thymeleaf layout
+
+    lombok
+
+1. 메시지
+1) MessageSource
+2) ResourceBundleMessageSource
+3) 다국어 지원 위한 메시지 파일
+    commons_en.properties
+    commons_jp.properties
+    commons_zn.properties
+
+2. 커맨드 객체 검증
+- 커맨드 객체: 템플릿쪽에서 EL식 변수로 접근
+              변수명은 커맨드 객체 클래스명에서 첫 글자만 소문자
+
+1) Validator 인터페이스
+
+2) Errors
+        - 커맨드 객체 자체의 오류 -
+        reject("에러코드")
+        reject("에러코드", "기본메세지")
+
+        - 커맨드 객체의 특정 필드 한정 오류 -
+        rejectValue("양식 필드명(name)", "에러코드")
+        rejectValue("양식 필드명(name)", "에러코드", "기본메세지")
+
+        boolean hasErrors(): reject, rejectValue가 한 개라도 호출이 된다면 true
+
+        - 에러의 정보
+
+        - 템플릿 연동
+        #fields.errors("필드명"): 특정 필드의 에러 메세지, 배열
+        #fields.globalErrors(): 커맨드 객체 자체 에러 메세지
+            참고) #fields.errors('global')
+
+        - @ModelAttribute: 커맨드 객체 -> EL식 변수 추가
+
+3) ValidationUtils: 필수 항목 검증을 쉽게 할 수 있는 정적 메서드 정의
+    rejectIfEmpty(...): 항목이 null
+    rejectIfEmptyOrWhitespace(...): 항목이 null이거나 비어있을 때
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. 글로벌 범위 Validator와 컨트롤러 범위 Validator
+1) 글로벌 범위 Validator 설정과 @Valid 애노테이션
+- WebMvcConfigurer의 getValidalor()
+- @Valid 커맨드 객체: 검증을 할 커맨드 객체
+    - Bean Validation API + Hibernate Validator
+
+2) @InitBinder 애노테이션을 이용한 컨트롤러 범위 Validator
+@InitBinder
+protected void InitBinder(WebData)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Digits
+@Size
+
+
+
+
+
+
+
+@PositiveOrZero
+@Email
+@Future
+@FutureOrPresent
+@Past
+@PastOrPresent
+
+
+회원 비밀번호
+-> DB에 그대로 입력 X
+
+비밀번호: 암호화 필수
+
+1) 양방향 암호화
+    암호화 <--> 복호화: AES256, ARIA
+
+2) 단방향 암호화
+    복호화 X: 해시
+
+    비밀번호: 단방향 암호화
+            - 비밀번호의 일치여부만 확인
+        1) 고정 해시
+            - 같은 값에 대해서 같은 해시 값
+            md5, sha1, sha256, sha512, ...
+
+        2) 유동 해시
+            - 같은 값에 대해서 해시를 만들 때 마다 값이 변경
+            - 예측 불가능성
+            - 별도 알고리즘에 의해서 값의 일치 여부를 검증
+
+            BCrypt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

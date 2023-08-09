@@ -1,0 +1,10 @@
+@Component
+@Service
+@Inject
+@Configuration
+@Controller
+@RestController
+@Repository
+@ControllerAdvice
+@RestControllerAdvice
+@Aspect

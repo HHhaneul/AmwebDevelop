@@ -1,0 +1,58 @@
+JDBC로 데이터베이스 연동
+JDBC(Java DataBase Connectivity) API(Application Programming Interface)
+
+1. 순서
+    1) java.sql.* 패캐지 임포트
+    2) JDBC 드라이버 로딩
+        ojdbc8.jar
+
+        - 동적 로딩: Class.forName("패키지명을 포함한 클래스명");
+
+    3) 데이터베이스 접속을 위한 Connection객체 생성
+        DriverManager
+            .getConnection(String url)
+            .getConnection(String url, String user, String password)
+            .getConnection(String url, Properties prop)
+
+    4) 쿼리문을 실행하기 위한 Statement/PreparedStatement/CallableStatement 객체 생성 쿼리 실행
+    5) 쿼리 실행 결과 값(int, ResultSet) 사용
+    6) 사용된 객체(ResultSet, Statement/PreparedStatement/CallableStatement, Connection) 종료
+
+데이터베이스 쿼리 실행
+1. Statement
+Connection
+    -createStatement()
+
+1) 정적인 쿼리에 사용
+2) 하나의 쿼리를 사용하고 나면 더는 사용할 수 없습니다.
+3) Statement 객체의 메서드 종류
+    ResultSet executeQuery(String sql): SELECT 문
+        반환값: ResultSet - 레코드를 조회할 수 있는 커서
+
+            참고) 날짜, 시간
+                날짜만 조회
+                getDate(...)
+
+                시간만 조회
+                getTime(...)
+                
+                날짜와 시간 조회
+                getTimestamp(...)
+
+    int executeUpdate(String sql): INSERT, UPDATE, DELETE 문
+        반환값: 반영된 레코드 개수
+
+2. PreparedStatement
+Connection
+    .preparedStatement(String sql);
+
+1) 동적인 쿼리에 사용
+2) PreparedStatement 객체는 하나의 객체로 여러번의 쿼리를 실행할 수 있으며, 동일한 쿼리문을 특정 값만 바꾸어서 여러 번 실행해야할 때, 매개변수가 많아서 쿼리문을 정리해야할 때 유용합니다.
+
+3) setXxx() 메서드
+4) PreparedStatement 객체의 메서드
+    ResultSet rs executeQuery();
+    int executeUpdate();
+
+쿼리문 실행 결과 값 가져오기
+1. ResultSet
