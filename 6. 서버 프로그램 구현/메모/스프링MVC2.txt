@@ -1,0 +1,41 @@
+스프링 MVC 
+1. 세션
+2.인터셉터
+1) HandlerInterceptor 인터페이스 
+- boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
+    - 컨트롤러 빈이 실행되기 전
+    - 공통 수행 부분 + 통제 (반환 값이 true -> 컨트롤러 빈이 실행, false -> 실행)
+
+- void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception;
+    - 컨트롤로 빈이 실행되고 ModelAndView를 반환한 시점 호출 (출력 전)
+
+- void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception;
+    - 응답 완료 후에 호출
+
+2) WebMvcConfigurer 인터페이스 : addInterceptors(InterceptorRegistry registry)
+
+3) Ant 경로 패턴
+- * : 0개 또는 그 이상의 글자 - 바로 아래 경로
+- **: 0개 또는 그 이상의 폴더 경로 - 모든 하위 경로
+- ? : 1개 글자
+
+/m?00
+-> /m100
+/m200
+
+3.쿠키
+@CookieValue
+
+
+서버 응답 헤더
+Set-Cookie: 키=값; 키=값 ...
+
+HttpServletResponse
+    addCookie(...)
+
+브라우저: 쿠키 등록
+
+요청 헤더: cookie: ....
+
+HttpServletRequest
+    Cookie[] getCookies()

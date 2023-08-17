@@ -15,7 +15,9 @@ public interface MobileValidator {
          * ^패턴: 패턴으로 시작
          * 패턴$: 패턴으로 종료
          */
-        num = num.replaceAll("\\D", ""); // 숫자가 아닌 문자 모두 제거 -> 숫자
+
+        /** 숫자가 아닌 문자 모두 제거 -> 숫자 */
+        num = num.replaceAll("\\D", "");
         String pattern = "^01[016]\\d{3,4}\\d{4}$";
         
         return num.matches(pattern);

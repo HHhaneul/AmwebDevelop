@@ -8,9 +8,9 @@ public class Ex03 {
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-        String user = "BOARD_B1";
-        String password = "_aA123456";
-        String sql = "INSERT INTO BOARD_DATA (id, poster, subject, content) VALUES (board_data_seq.nextval, ?, ?, ?)";
+        String user = "BOARDTEST";
+        String password = "aA123456";
+        String sql = "INSERT INTO BOARD_ (id, poster, subject, content) VALUES (board_data_seq.nextval, ?, ?, ?)";
 
         try(Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"ID"})) {

@@ -1,0 +1,75 @@
+Spring Data JPA
+
+1. JPA 동작 방식
+
+0) ORM: 객체 <---> 번역(ORM) -> DB
+
+1) JPA란?
+   JPA (Java Persistence API): ORM 표준(Object Relational Mapping)
+   Hibernate Entity Manager
+
+- 자바 영속성 API
+- 영속성: 상태 변화 감지 메모리
+  : 데이터 값이 변경: UPDATE 쿼리
+  : 없는 데이터를 추가한 엔티티: INSERT 쿼리
+  : 데이터 제거: DELETE 쿼리
+
+동일한 코드 -> 드라이버 변경 -> 플랫폼에 맞는 쿼리 실행
+
+2) JPA 동직 방식
+
+   - 엔티티: 엔티티 클래스의 정의: 테이블의 정의
+     : 각각의 엔티티는 데이터 하나 하나
+
+   - 엔티티 매니저 팩토리
+   - 엔티티 매니저
+     1) find(): 조회, 기본키로 조회, 이미 영속성에 엔티티가 있으면 DB에서 조회 X - 1차 캐시, 성능상 이점
+     2) persist(): 영속성 컨텍스트에 엔티티를 영속: 상태 감지 시작
+     3) remove(): 영속성 상태 -> 제거 상태: DELETE
+     4) flush(): DB반영
+        참고)
+          find(..) 조회 메서드 호출 시 flush()가 먼저 진행되고 -> 조회
+     5) detach(): 영속성 분리: 상태감지X
+     6) clear(): 영속성 전체 제거
+     7) merge(): 분리된 영속성 -> 영속 상태: 상태 감지 O
+
+  - EntityManagerFactory
+  - EntityManager: 엔티티 영속성 관리
+
+
+3) 영속성 컨텍스트 사용 시 이점
+4) 영속성 컨텍스트
+5) 엔티티의 생명 주기
+
+
+- 1차 캐시
+- 동일성 보장
+- 영속성 컨텍스트 쓰기 지연 SQL 저장소
+- 트랜잭션을 지원하는 쓰기 지연
+
+
+7) 설정하기
+  - DDL_AUTO
+    noContentcreate
+    create-drop
+    update
+    validate
+
+
+    개발시: create, update
+    배포 서버: none, validate
+
+
+2. Entity 설계하기
+
+1) 엔티티 매핑 관련 애노테이션
+- @Entity
+  엔티티명: 기본값: 클래스명
+  참고) JPQL(Java Persistence Query Languege)
+  - name, value - 엔티티 명을 직접 설정
+- @Table
+  - name: 테이블 명
+    : 엔티티 명 == 테이블 명
+
+2) 공통 속성화
+3) @Id

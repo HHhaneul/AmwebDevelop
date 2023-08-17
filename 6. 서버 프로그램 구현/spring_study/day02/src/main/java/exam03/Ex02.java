@@ -8,9 +8,9 @@ public class Ex02 {
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
         String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-        String user = "BOARD_B1";
-        String password = "_aA123456";
-        String sql = "SELECT * FROM BOARD_DATA";
+        String user = "BOARDTEST";
+        String password = "aA123456";
+        String sql = "SELECT * FROM BOARD_";
 
         try(Connection conn = DriverManager.getConnection(url, user, password);
             Statement stmt = conn.createStatement()) {

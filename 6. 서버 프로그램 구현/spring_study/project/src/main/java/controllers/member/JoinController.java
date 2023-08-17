@@ -1,5 +1,6 @@
-package controllers.models;
+package controllers.member;
 
+import controllers.member.JoinForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import models.members.JoinService;

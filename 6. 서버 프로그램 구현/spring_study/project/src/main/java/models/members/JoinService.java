@@ -1,6 +1,6 @@
 package models.members;
 
-import controllers.models.*;
+import controllers.member.JoinForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -11,10 +11,12 @@ public class JoinService {
     private final JoinValidator joinValidator;
     private final MemberDao memberDao;
 
-    public void join(JoinForm joinForm, Errors errors){
+    public void join(JoinForm joinForm, Errors errors) {
         joinValidator.validate(joinForm, errors);
 
-        if (errors.hasErrors())return;
+        if (errors.hasErrors()) {
+            return;
+        }
 
         memberDao.register(joinForm);
     }
