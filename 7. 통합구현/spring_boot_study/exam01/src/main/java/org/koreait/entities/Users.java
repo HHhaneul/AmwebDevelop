@@ -1,15 +1,10 @@
 package org.koreait.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.*;
 import org.koreait.constants.UserType;
 
-import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Data @Builder
@@ -38,4 +33,12 @@ public class Users extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(length=10, nullable = false)
     private UserType type = UserType.USER;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<BoardData> boardDatas = new ArrayList<>();
+
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="profile_id")
+    @ToString.Exclude
+    private UserProfile profile;
 }

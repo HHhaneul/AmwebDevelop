@@ -1,0 +1,21 @@
+스프링 시큐리티
+- 인증(로그인), 인가(접근 제어)
+
+1. 의존성 설치
+2. 스프링 시큐리티 설정
+3. 회원가입 구현
+    1) UserDetails 인터페이스: 아이디, 비번, 통제 기능
+    2) UserDetailsService 인터페이스: 회원정보 조회
+
+4. 시큐리티를 이용한 회원 인증(로그인) 구현
+5. 로그인 정보 가져오기
+1) Principal 요청 메서드에 주입
+2) SecurityContextHolder를 통해서 가져오기
+3) @AuthenticationPrincipal
+4) Authentication
+
+
+/error 템플릿 경로: 응답코드.html
+
+6. thymeleaf-extras=springsecurity6
+    1) xmlns:sec="http://www.thymeleaf.org/extras/spring-security"

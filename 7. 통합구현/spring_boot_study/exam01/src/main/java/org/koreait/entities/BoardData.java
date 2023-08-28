@@ -1,10 +1,9 @@
 package org.koreait.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.*;
 
 @Entity
 @Data @Builder
@@ -24,4 +23,13 @@ public class BoardData extends BaseEntity {
     private String content;
 
     private long hit;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_no")
+    @ToString.Exclude
+    private Users user;
+
+    @ManyToMany(fetch=FetchType.LAZY)
+    @ToString.Exclude
+    private List<HashTag> tags = new ArrayList<>();
 }
